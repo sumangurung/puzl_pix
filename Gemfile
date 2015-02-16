@@ -14,6 +14,10 @@ gem 'jbuilder'
 
 group :development, :test do
     gem 'rspec-rails', '~> 3.0'
+    gem 'pry'
+    gem 'pry-remote'
+    gem 'pry-stack_explorer'
+    gem 'pry-byebug'
 end
 
 # To use ActiveModel has_secure_password
@@ -28,4 +32,3 @@ end
 # gem 'capistrano', :group => :development
 
 # To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
