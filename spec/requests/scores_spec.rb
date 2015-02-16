@@ -9,7 +9,7 @@ RSpec.describe "game score" do
 
     score_params = {
       score: {
-        user_id: '123',
+        player_id: '123',
         game_id: 'awesomegame1',
         cols: '3',
         date: "02/02/2014",

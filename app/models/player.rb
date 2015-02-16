@@ -1,4 +1,4 @@
-class User
+class Player
   def self.create!(params)
     new(params)
   end
