@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216183838) do
+ActiveRecord::Schema.define(version: 20150217000946) do
+
+  create_table "api_keys", force: :cascade do |t|
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "challengees", force: :cascade do |t|
     t.string  "fb_id"
