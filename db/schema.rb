@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217000946) do
+ActiveRecord::Schema.define(version: 20150217024104) do
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "token"
@@ -31,6 +31,20 @@ ActiveRecord::Schema.define(version: 20150217000946) do
     t.string   "picture_url"
     t.string   "thumb_url"
     t.string   "game_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "scores", force: :cascade do |t|
+    t.date     "date"
+    t.integer  "player_id"
+    t.string   "game_id"
+    t.integer  "cols"
+    t.integer  "rows"
+    t.integer  "difficulty"
+    t.integer  "game_mode"
+    t.integer  "moves"
+    t.integer  "time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
