@@ -1,10 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe "player registration info" do
+  let(:token) { 'abc123' }
+  before do
+    allow(Authentication).to receive(:valid_key?)
+      .with(token)
+      .and_return(true)
+  end
+
   it "creates a player record" do
     request_headers = {
       "Accept" => "application/json",
-      "Content-Type" => "application/json"
+      "Content-Type" => "application/json",
+      "Authorization" => "Token token=#{token}"
     }
     player_params = {
       player: { fb_id: 123, first_name: "Jimmy", last_name: "Johnson", username: "jj" }

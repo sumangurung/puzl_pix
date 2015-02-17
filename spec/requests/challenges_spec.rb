@@ -1,11 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe "Challenge friends" do
+  before do
+    allow(Authentication).to receive(:valid_key?)
+      .with("abc123")
+      .and_return(true)
+  end
+
   describe "Store Challenges" do
     it "stores a challenge request by a player" do
       request_headers = {
         "Accept" => "application/json",
-        "Content-Type" => "application/json"
+        "Content-Type" => "application/json",
+        "Authorization" => "Token token=abc123"
       }
 
       challenge_params = {
@@ -44,8 +51,8 @@ RSpec.describe "Challenge friends" do
 
       request_headers = {
         "Accept" => "application/json",
-        "Content-Type" => "application/json"
-
+        "Content-Type" => "application/json",
+        "Authorization" => "Token token=abc123"
       }
       get '/v1/challenges', { fb_id: 'fbid1' }, request_headers
 

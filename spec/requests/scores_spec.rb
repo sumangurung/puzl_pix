@@ -1,10 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe "game score" do
+  let(:token) { 'abc123' }
+  before do
+    allow(Authentication).to receive(:valid_key?)
+      .with(token)
+      .and_return(true)
+  end
   it "stores the game score" do
     request_headers = {
       "Accept" => "application/json",
-      "Content-Type" => "application/json"
+      "Content-Type" => "application/json",
+      "Authorization" => "Token token=#{token}"
     }
 
     score_params = {
