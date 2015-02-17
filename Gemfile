@@ -14,6 +14,7 @@ gem 'jbuilder'
 
 group :development, :test do
     gem 'rspec-rails', '~> 3.0'
+    gem 'rspec-mocks'
     gem 'pry'
     gem 'pry-remote'
     gem 'pry-stack_explorer'
