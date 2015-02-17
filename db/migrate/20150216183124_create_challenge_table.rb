@@ -5,6 +5,8 @@ class CreateChallengeTable < ActiveRecord::Migration
       t.string :picture_url
       t.string :thumb_url
       t.string :game_id
+
+      t.timestamps
     end
   end
 end

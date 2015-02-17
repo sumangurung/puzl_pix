@@ -20,15 +20,19 @@ ActiveRecord::Schema.define(version: 20150217000946) do
   end
 
   create_table "challengees", force: :cascade do |t|
-    t.string  "fb_id"
-    t.integer "challenge_id"
+    t.string   "fb_id"
+    t.integer  "challenge_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "challenges", force: :cascade do |t|
-    t.date   "date"
-    t.string "picture_url"
-    t.string "thumb_url"
-    t.string "game_id"
+    t.date     "date"
+    t.string   "picture_url"
+    t.string   "thumb_url"
+    t.string   "game_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
