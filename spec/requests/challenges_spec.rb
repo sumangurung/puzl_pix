@@ -28,6 +28,22 @@ RSpec.describe "Challenge friends" do
       post '/v1/challenges', challenge_params.to_json, request_headers
 
       expect(response.status).to eq 201
+
+      get '/v1/challenges', { fb_id: 'fbid1' }, request_headers
+      expect(response.status).to eq 200
+      challenges = JSON.parse(response.body)['challenges']
+      expect(challenges.first['date']).to eq "2013-02-02"
+      expect(challenges.first['picture_url']).to eq "http://www.foo"
+      expect(challenges.first['thumb_url']).to eq "http://www.bar"
+      expect(challenges.first['game_id']).to eq "awesomegame1"
+
+      get '/v1/challenges', { fb_id: 'fbid2' }, request_headers
+      expect(response.status).to eq 200
+      challenges = JSON.parse(response.body)['challenges']
+      expect(challenges.first['date']).to eq "2013-02-02"
+      expect(challenges.first['picture_url']).to eq "http://www.foo"
+      expect(challenges.first['thumb_url']).to eq "http://www.bar"
+      expect(challenges.first['game_id']).to eq "awesomegame1"
     end
   end
 

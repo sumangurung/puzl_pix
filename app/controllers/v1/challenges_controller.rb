@@ -1,6 +1,7 @@
 module V1
   class ChallengesController < ApplicationController
     def create
+      Challenges.create!(params[:challenge])
       head :created
     end
 
