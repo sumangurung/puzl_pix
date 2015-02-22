@@ -25,4 +25,9 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.apns_host = 'gateway.sandbox.push.apple.com'
+  config.apns_pem = File.join(Rails.root, 'certs', 'development.pem')
+  config.apns_port = 2195
+  config.apns_pass = 'whatsupnowww'
 end

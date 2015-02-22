@@ -64,4 +64,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.apns_host = 'gateway.push.apple.com'
+  config.apns_pem = File.join(Rails.root, 'certs', 'puzl_pix_key.pem')
+  config.apns_port = 2195
+  config.apns_pass = 'whatsupnowww'
 end
