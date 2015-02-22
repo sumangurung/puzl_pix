@@ -11,6 +11,6 @@ module ChallengeNotifier
       end
     end.flatten
 
-    APNS.send_notifications(notifications)
+    APNS.send_notifications(notifications) unless notifications.empty?
   end
 end
