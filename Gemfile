@@ -9,7 +9,7 @@ gem 'spring', :group => :development
 
 gem 'apns'
 
-gem 'sqlite3'
+gem 'pg'
 
 gem 'jbuilder'
 
