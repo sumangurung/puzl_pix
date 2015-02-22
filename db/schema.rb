@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217024104) do
+ActiveRecord::Schema.define(version: 20150222225445) do
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "token"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(version: 20150217024104) do
     t.string   "picture_url"
     t.string   "thumb_url"
     t.string   "game_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string   "fb_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "username"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
