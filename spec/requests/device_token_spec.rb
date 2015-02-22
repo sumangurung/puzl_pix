@@ -15,11 +15,16 @@ RSpec.describe 'store device token for user' do
       "Authorization" => "Token token=#{token}"
     }
 
+    Player.create( fb_id: 'fbid1')
+    device_token = "123abc456dev"
     device_token_params = {
-      device_token: { token: "123abc456dev" }
+      device_token: { token: device_token }
     }.to_json
     post "/v1/players/fbid1/device_tokens", device_token_params, request_headers
 
     expect(response.status).to eq 201
+
+    player = Player.find_by fb_id: "fbid1"
+    expect(player.device_tokens.map(&:token)).to include(device_token)
   end
 end
