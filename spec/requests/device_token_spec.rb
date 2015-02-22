@@ -17,9 +17,7 @@ RSpec.describe 'store device token for user' do
 
     Player.create( fb_id: 'fbid1')
     device_token = "123abc456dev"
-    device_token_params = {
-      device_token: { token: device_token }
-    }.to_json
+    device_token_params = { device_token: device_token }.to_json
     post "/v1/players/fbid1/device_tokens", device_token_params, request_headers
 
     expect(response.status).to eq 201

@@ -9,7 +9,7 @@ module V1
     private
 
     def device_token_params
-      params.require(:device_token).permit(:token)
+      params.require(:device_token)
     end
   end
 end
