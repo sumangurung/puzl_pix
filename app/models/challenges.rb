@@ -9,6 +9,7 @@ module Challenges
   def self.create!(params)
     challenge = Challenge.new(params.with_indifferent_access)
     Persistence::Challenge.save!(challenge)
+    ChallengeNotifier.notify(challenge)
   end
 
   def self.challenges
