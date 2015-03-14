@@ -6,6 +6,11 @@ module V1
       render template: '/players/show', status: :created
     end
 
+    def show
+      @player = Player.find_by! uuid: params[:id]
+      render template: '/players/show', status: :ok
+    end
+
     def update
       @player = Player.find_by! uuid: params[:id]
       if @player.update_attributes(player_params)
