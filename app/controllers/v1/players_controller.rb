@@ -9,7 +9,7 @@ module V1
     private
 
     def player_params
-      permitted_attributes = %i(fb_id first_name last_name
+      permitted_attributes = %i(uuid fb_id first_name last_name
       username)
       params.require(:player).permit(*permitted_attributes)
     end
