@@ -6,7 +6,7 @@ module V1
     end
 
     def index
-      @scores = Persistence::Score.all
+      @scores = Scores.fetch(params)
       render template: 'scores/index'
     end
 
