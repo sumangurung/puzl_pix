@@ -63,4 +63,10 @@ RSpec.describe "player registration info" do
     expect(players.first.last_name).to eq("Johnson")
     expect(players.first.username).to eq("jj")
   end
+
+  it "update a player which does not exist" do
+    put '/v1/players/doesnotexist', { player: { username: "foobar" } }.to_json, request_headers
+
+    expect(response.status).to eq 404
+  end
 end

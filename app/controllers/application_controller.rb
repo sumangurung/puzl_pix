@@ -4,6 +4,10 @@ class ApplicationController < ActionController::API
 
   before_filter :authenticate_request
 
+  rescue_from 'ActiveRecord::RecordNotFound' do |exception|
+    head :not_found
+  end
+
   protected
 
   def authenticate_request
