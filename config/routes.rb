@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :v1 do
-    resources :players, only: [:create] do
+    resources :players, only: [:create, :update] do
       resources :device_tokens, only: [:create]
     end
     resources :scores, only: [:create, :index]
