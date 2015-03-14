@@ -74,4 +74,20 @@ RSpec.describe "game score" do
     score = scores.first
     expect(score["game_mode"]).to eq "untimed"
   end
+
+  it "allows filter by difficulty" do
+    get '/v1/scores', { difficulty: "1" }, request_headers
+    expect(response.status).to eq 200
+    scores = JSON.parse(response.body)['scores']
+    expect(scores.length).to eq 1
+    score = scores.first
+    expect(score["difficulty"]).to eq 1
+
+    get '/v1/scores', { difficulty: '3' }, request_headers
+    expect(response.status).to eq 200
+    scores = JSON.parse(response.body)['scores']
+    expect(scores.length).to eq 1
+    score = scores.first
+    expect(score["difficulty"]).to eq 3
+  end
 end
