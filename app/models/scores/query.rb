@@ -6,10 +6,26 @@ module Scores
     end
 
     def execute
+      relation = apply_player_filter(@relation)
+      relation = apply_game_mode_filter(relation)
+      relation
+    end
+
+    private
+
+    def apply_player_filter(relation)
       unless @params[:player_id].blank?
-        @relation.where(player_id: @params[:player_id])
+        relation.where(player_id: @params[:player_id])
       else
-        @relation
+        relation
+      end
+    end
+
+    def apply_game_mode_filter(relation)
+      unless @params[:game_mode].blank?
+        relation.where(game_mode: @params[:game_mode])
+      else
+        relation
       end
     end
   end

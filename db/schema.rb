@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150314213629) do
+ActiveRecord::Schema.define(version: 20150314233556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,11 +64,13 @@ ActiveRecord::Schema.define(version: 20150314213629) do
     t.integer  "cols"
     t.integer  "rows"
     t.integer  "difficulty"
-    t.integer  "game_mode"
+    t.string   "game_mode"
     t.integer  "moves"
     t.integer  "time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "scores", ["game_mode"], name: "index_scores_on_game_mode", using: :btree
 
 end
