@@ -16,6 +16,7 @@ RSpec.describe "push notification on challenges" do
         "Authorization" => "Token token=#{token}"
       }
       friend1 = Player.create!(
+        uuid: "abc",
         fb_id: "fbid1",
         first_name: "John",
         last_name: "Ball",
@@ -24,6 +25,7 @@ RSpec.describe "push notification on challenges" do
       friend1.add_device_token("token1")
 
       friend2= Player.create(
+        uuid: "def",
         fb_id: "fbid2",
         first_name: "Kevin",
         last_name: "Friend",

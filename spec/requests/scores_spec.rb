@@ -49,7 +49,7 @@ RSpec.describe "game score" do
       cols: '3',
       date: "02/02/2014",
       difficulty: "1",
-      game_mode: "2",
+      game_mode: "timed",
       moves: "20",
       rows: '3',
       time: '140'
@@ -61,7 +61,7 @@ RSpec.describe "game score" do
       cols: '4',
       date: "02/02/2014",
       difficulty: "3",
-      game_mode: "4",
+      game_mode: "timed",
       moves: "40",
       rows: '4',
       time: '340'
@@ -79,7 +79,7 @@ RSpec.describe "game score" do
     expect(first_score["rows"]).to eq 3
     expect(first_score["date"]).to eq '2014-02-02'
     expect(first_score["difficulty"]).to eq 1
-    expect(first_score["game_mode"]).to eq 2
+    expect(first_score["game_mode"]).to eq "timed"
     expect(first_score["moves"]).to eq 20
     expect(first_score["time"]).to eq 140
 
@@ -89,7 +89,7 @@ RSpec.describe "game score" do
     expect(second_score["rows"]).to eq 4
     expect(second_score["date"]).to eq '2014-02-02'
     expect(second_score["difficulty"]).to eq 3
-    expect(second_score["game_mode"]).to eq 4
+    expect(second_score["game_mode"]).to eq "timed"
     expect(second_score["moves"]).to eq 40
     expect(second_score["time"]).to eq 340
   end

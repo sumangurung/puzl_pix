@@ -25,8 +25,8 @@ RSpec.describe "Challenge friends" do
         }
       }
 
-      Player.create!(fb_id: 'fbid1')
-      Player.create!(fb_id: 'fbid2')
+      Player.create!(uuid: "abc", fb_id: 'fbid1')
+      Player.create!(uuid: "def", fb_id: 'fbid2')
 
       post '/v1/challenges', challenge_params.to_json, request_headers
 
@@ -52,7 +52,7 @@ RSpec.describe "Challenge friends" do
 
   describe "Query Challenges" do
     it "fetches all the challenges for a player" do
-      Player.create!(fb_id: 'fbid1')
+      Player.create!(uuid: "abc", fb_id: 'fbid1')
 
       Challenges.create!(
         date: "02/02/2013",
