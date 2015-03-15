@@ -1,5 +1,8 @@
 module Scores
   class Query
+    TIMED_GAME = 'timed'
+    UNTIMED_GAME = 'untimed'
+
     def initialize(relation, params)
       @relation = relation
       @params = params.dup
@@ -9,6 +12,7 @@ module Scores
       relation = apply_player_filter(@relation)
       relation = apply_game_mode_filter(relation)
       relation = apply_game_difficulty_filter(relation)
+      relation = apply_sort_order(relation)
       relation
     end
 
@@ -33,6 +37,17 @@ module Scores
     def apply_game_difficulty_filter(relation)
       unless @params[:difficulty].blank?
         relation.where(difficulty: @params[:difficulty])
+      else
+        relation
+      end
+    end
+
+    def apply_sort_order(relation)
+      case @params[:game_mode]
+      when TIMED_GAME
+        relation.order(time: :asc)
+      when UNTIMED_GAME
+        relation.order(moves: :asc)
       else
         relation
       end
