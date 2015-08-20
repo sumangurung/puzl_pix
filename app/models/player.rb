@@ -4,4 +4,8 @@ class Player < ActiveRecord::Base
   def add_device_token(device_token)
     device_tokens.create(token: device_token)
   end
+
+  def name
+    [first_name, last_name].join(" ")
+  end
 end

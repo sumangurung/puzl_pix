@@ -18,9 +18,15 @@ RSpec.describe "game score" do
   end
 
   it "stores the game score" do
+    player = Player.create(
+      uuid: SecureRandom.uuid,
+      first_name: 'John',
+      last_name: 'Doe'
+    )
+
     score_params = {
       score: {
-        player_id: '123',
+        player_id: player.id,
         game_id: 'awesomegame1',
         cols: '3',
         date: "02/02/2014",
@@ -43,8 +49,20 @@ RSpec.describe "game score" do
   end
 
   it "fetches the scores of all users" do
+    player1 = Player.create(
+      uuid: SecureRandom.uuid,
+      first_name: "John",
+      last_name: "Doe",
+    )
+
+    player2 = Player.create(
+      uuid: SecureRandom.uuid,
+      first_name: "Susan",
+      last_name: "Smith"
+    )
+
     Persistence::Score.create(
-      player_id: '123',
+      player_id: player1.id,
       game_id: 'awesomegame1',
       cols: '3',
       date: "02/02/2014",
@@ -56,7 +74,7 @@ RSpec.describe "game score" do
     )
 
     Persistence::Score.create(
-      player_id: '234',
+      player_id: player2.id,
       game_id: 'awesomegame3',
       cols: '4',
       date: "02/02/2014",
@@ -73,7 +91,8 @@ RSpec.describe "game score" do
     scores = JSON.parse(response.body)['scores']
     expect(scores.length).to eq 2
     first_score, second_score = scores
-    expect(first_score["player_id"]).to eq 123
+    expect(first_score["player_id"]).to eq player1.id
+    expect(first_score["player_name"]).to eq player1.name
     expect(first_score["game_id"]).to eq 'awesomegame1'
     expect(first_score["cols"]).to eq 3
     expect(first_score["rows"]).to eq 3
@@ -83,7 +102,8 @@ RSpec.describe "game score" do
     expect(first_score["moves"]).to eq 20
     expect(first_score["time"]).to eq 140
 
-    expect(second_score["player_id"]).to eq 234
+    expect(second_score["player_id"]).to eq player2.id
+    expect(second_score["player_name"]).to eq player2.name
     expect(second_score["game_id"]).to eq 'awesomegame3'
     expect(second_score["cols"]).to eq 4
     expect(second_score["rows"]).to eq 4

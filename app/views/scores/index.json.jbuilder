@@ -1,6 +1,7 @@
 json.scores @scores do |score|
   json.date score.date
   json.player_id score.player_id
+  json.player_name score.player && score.player.name
   json.game_id score.game_id
   json.cols score.cols
   json.rows score.cols
