@@ -19,8 +19,8 @@ module Scores
     private
 
     def apply_player_filter(relation)
-      unless @params[:player_id].blank?
-        relation.where(player_id: @params[:player_id])
+      unless @params[:player_uuid].blank?
+        relation.where(player_uuid: @params[:player_uuid])
       else
         relation
       end

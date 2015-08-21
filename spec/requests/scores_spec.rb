@@ -26,7 +26,7 @@ RSpec.describe "game score" do
 
     score_params = {
       score: {
-        player_id: player.id,
+        player_uuid: player.uuid,
         game_id: 'awesomegame1',
         cols: '3',
         date: "02/02/2014",
@@ -62,7 +62,7 @@ RSpec.describe "game score" do
     )
 
     Persistence::Score.create(
-      player_id: player1.id,
+      player_uuid: player1.uuid,
       game_id: 'awesomegame1',
       cols: '3',
       date: "02/02/2014",
@@ -74,7 +74,7 @@ RSpec.describe "game score" do
     )
 
     Persistence::Score.create(
-      player_id: player2.id,
+      player_uuid: player2.uuid,
       game_id: 'awesomegame3',
       cols: '4',
       date: "02/02/2014",
@@ -91,7 +91,7 @@ RSpec.describe "game score" do
     scores = JSON.parse(response.body)['scores']
     expect(scores.length).to eq 2
     first_score, second_score = scores
-    expect(first_score["player_id"]).to eq player1.id
+    expect(first_score["player_uuid"]).to eq player1.uuid
     expect(first_score["player_name"]).to eq player1.name
     expect(first_score["game_id"]).to eq 'awesomegame1'
     expect(first_score["cols"]).to eq 3
@@ -102,7 +102,7 @@ RSpec.describe "game score" do
     expect(first_score["moves"]).to eq 20
     expect(first_score["time"]).to eq 140
 
-    expect(second_score["player_id"]).to eq player2.id
+    expect(second_score["player_uuid"]).to eq player2.uuid
     expect(second_score["player_name"]).to eq player2.name
     expect(second_score["game_id"]).to eq 'awesomegame3'
     expect(second_score["cols"]).to eq 4

@@ -17,7 +17,7 @@ RSpec.describe "game score" do
       .and_return(true)
 
     Persistence::Score.create(
-      player_id: '123',
+      player_uuid: '123',
       game_id: 'awesomegame1',
       cols: '3',
       date: "02/02/2014",
@@ -29,7 +29,7 @@ RSpec.describe "game score" do
     )
 
     Persistence::Score.create(
-      player_id: '234',
+      player_uuid: '234',
       game_id: 'awesomegame3',
       cols: '4',
       date: "02/02/2014",
@@ -42,20 +42,20 @@ RSpec.describe "game score" do
   end
 
   it "allows filtering by user" do
-    get '/v1/scores', { player_id: 123 }, request_headers
+    get '/v1/scores', { player_uuid: "123" }, request_headers
     expect(response.status).to eq 200
     scores = JSON.parse(response.body)['scores']
     expect(scores.length).to eq 1
     score = scores.first
-    expect(score["player_id"]).to eq 123
+    expect(score["player_uuid"]).to eq "123"
     expect(score["game_id"]).to eq 'awesomegame1'
 
-    get '/v1/scores', { player_id: 234 }, request_headers
+    get '/v1/scores', { player_uuid: "234" }, request_headers
     expect(response.status).to eq 200
     scores = JSON.parse(response.body)['scores']
     expect(scores.length).to eq 1
     score = scores.first
-    expect(score["player_id"]).to eq 234
+    expect(score["player_uuid"]).to eq "234"
     expect(score["game_id"]).to eq 'awesomegame3'
   end
 
