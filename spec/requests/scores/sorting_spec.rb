@@ -23,7 +23,7 @@ RSpec.describe "game score" do
         player_uuid: '123',
         game_id: 'awesomegame1',
         difficulty: "1",
-        game_mode: "timed",
+        game_mode: "0",
         moves: "20",
         time: '440'
       )
@@ -32,7 +32,7 @@ RSpec.describe "game score" do
         player_uuid: '323',
         game_id: 'awesomegame2',
         difficulty: "1",
-        game_mode: "timed",
+        game_mode: "0",
         moves: "20",
         time: '640'
       )
@@ -41,14 +41,14 @@ RSpec.describe "game score" do
         player_uuid: '234',
         game_id: 'awesomegame3',
         difficulty: "3",
-        game_mode: "timed",
+        game_mode: "0",
         moves: "40",
         time: '340'
       )
     end
 
     it "orders by time in ascending order" do
-      get '/v1/scores', { game_mode: "timed" }, request_headers
+      get '/v1/scores', { game_mode: "0" }, request_headers
       expect(response.status).to eq 200
       scores = JSON.parse(response.body)['scores']
       expect(scores.length).to eq 3
@@ -64,7 +64,7 @@ RSpec.describe "game score" do
         player_uuid: '123',
         game_id: 'awesomegame1',
         difficulty: "1",
-        game_mode: "untimed",
+        game_mode: "1",
         moves: "20",
         time: '440'
       )
@@ -73,7 +73,7 @@ RSpec.describe "game score" do
         player_uuid: '323',
         game_id: 'awesomegame2',
         difficulty: "1",
-        game_mode: "untimed",
+        game_mode: "1",
         moves: "50",
         time: '640'
       )
@@ -82,14 +82,14 @@ RSpec.describe "game score" do
         player_uuid: '234',
         game_id: 'awesomegame3',
         difficulty: "3",
-        game_mode: "untimed",
+        game_mode: "1",
         moves: "40",
         time: '340'
       )
     end
 
     it "orders by time in ascending order" do
-      get '/v1/scores', { game_mode: "untimed" }, request_headers
+      get '/v1/scores', { game_mode: "1" }, request_headers
       expect(response.status).to eq 200
       scores = JSON.parse(response.body)['scores']
       expect(scores.length).to eq 3

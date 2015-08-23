@@ -22,7 +22,7 @@ RSpec.describe "game score" do
       cols: '3',
       date: "02/02/2014",
       difficulty: "1",
-      game_mode: "timed",
+      game_mode: "0",
       moves: "20",
       rows: '3',
       time: '140'
@@ -34,7 +34,7 @@ RSpec.describe "game score" do
       cols: '4',
       date: "02/02/2014",
       difficulty: "3",
-      game_mode: "untimed",
+      game_mode: "1",
       moves: "40",
       rows: '4',
       time: '340'
@@ -60,19 +60,19 @@ RSpec.describe "game score" do
   end
 
   it "allows filter by game mode" do
-    get '/v1/scores', { game_mode: "timed" }, request_headers
+    get '/v1/scores', { game_mode: "0" }, request_headers
     expect(response.status).to eq 200
     scores = JSON.parse(response.body)['scores']
     expect(scores.length).to eq 1
     score = scores.first
-    expect(score["game_mode"]).to eq "timed"
+    expect(score["game_mode"]).to eq "0"
 
-    get '/v1/scores', { game_mode: 'untimed' }, request_headers
+    get '/v1/scores', { game_mode: '1' }, request_headers
     expect(response.status).to eq 200
     scores = JSON.parse(response.body)['scores']
     expect(scores.length).to eq 1
     score = scores.first
-    expect(score["game_mode"]).to eq "untimed"
+    expect(score["game_mode"]).to eq "1"
   end
 
   it "allows filter by difficulty" do

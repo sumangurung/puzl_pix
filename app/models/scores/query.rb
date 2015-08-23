@@ -1,7 +1,7 @@
 module Scores
   class Query
-    TIMED_GAME = 'timed'
-    UNTIMED_GAME = 'untimed'
+    TIMED_GAME = '0'
+    UNTIMED_GAME = '1'
 
     def initialize(relation, params)
       @relation = relation
