@@ -7,6 +7,10 @@ class Player < ActiveRecord::Base
   end
 
   def name
-    [first_name, last_name].join(" ")
+    if first_name.present? || last_name.present?
+      [first_name, last_name].join(" ")
+    else
+      "Player #{id}"
+    end
   end
 end
