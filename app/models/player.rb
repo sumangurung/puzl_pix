@@ -13,4 +13,13 @@ class Player < ActiveRecord::Base
       "Player #{id}"
     end
   end
+
+  def username
+    attr_value = read_attribute(:username)
+    if attr_value.blank?
+      "Player #{self.id}"
+    else
+      attr_value
+    end
+  end
 end

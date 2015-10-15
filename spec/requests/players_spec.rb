@@ -40,6 +40,19 @@ RSpec.describe "player registration info" do
     expect(players.first.username).to eq("jj")
   end
 
+  it "creates a default username if a username is not passed in" do
+    player_params = {
+      player: { uuid: "123abc", fb_id: "123", first_name: "Jimmy", last_name: "Johnson", username: "" }
+    }.to_json
+
+    post '/v1/players', player_params, request_headers
+
+    expect(response.status).to eq 201
+    player = JSON.parse(response.body)['player']
+    player_record = Player.find_by(uuid: "123abc")
+    expect(player['username']).to eq("Player #{player_record.id}")
+  end
+
   it "updates a player record" do
     player_params = { player: { uuid: "123abc" } }.to_json
     post '/v1/players', player_params, request_headers
