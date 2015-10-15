@@ -93,6 +93,7 @@ RSpec.describe "game score" do
     first_score, second_score = scores
     expect(first_score["player_uuid"]).to eq player1.uuid
     expect(first_score["player_name"]).to eq player1.username
+    expect(first_score["username"]).to eq player1.username
     expect(first_score["game_id"]).to eq 'awesomegame1'
     expect(first_score["cols"]).to eq 3
     expect(first_score["rows"]).to eq 3
@@ -104,6 +105,7 @@ RSpec.describe "game score" do
 
     expect(second_score["player_uuid"]).to eq player2.uuid
     expect(second_score["player_name"]).to eq player2.username
+    expect(second_score["username"]).to eq player2.username
     expect(second_score["game_id"]).to eq 'awesomegame3'
     expect(second_score["cols"]).to eq 4
     expect(second_score["rows"]).to eq 4
