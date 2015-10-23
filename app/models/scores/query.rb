@@ -13,6 +13,7 @@ module Scores
       relation = apply_game_mode_filter(relation)
       relation = apply_game_difficulty_filter(relation)
       relation = apply_sort_order(relation)
+      relation = apply_filter_scores_older_than_1_week(relation)
       relation
     end
 
@@ -51,6 +52,10 @@ module Scores
       else
         relation
       end
+    end
+
+    def apply_filter_scores_older_than_1_week(relation)
+      relation.where('date >= ?', 1.week.ago.to_date)
     end
   end
 end

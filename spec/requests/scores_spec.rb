@@ -29,7 +29,7 @@ RSpec.describe "game score" do
         player_uuid: player.uuid,
         game_id: 'awesomegame1',
         cols: '3',
-        date: "02/02/2014",
+        date: Date.today,
         difficulty: "very",
         game_mode: "0",
         moves: "20",
@@ -65,7 +65,7 @@ RSpec.describe "game score" do
       player_uuid: player1.uuid,
       game_id: 'awesomegame1',
       cols: '3',
-      date: "02/02/2014",
+      date: Date.today,
       difficulty: "1",
       game_mode: "0",
       moves: "20",
@@ -77,7 +77,7 @@ RSpec.describe "game score" do
       player_uuid: player2.uuid,
       game_id: 'awesomegame3',
       cols: '4',
-      date: "02/02/2014",
+      date: Date.today,
       difficulty: "3",
       game_mode: "0",
       moves: "40",
@@ -97,7 +97,7 @@ RSpec.describe "game score" do
     expect(first_score["game_id"]).to eq 'awesomegame1'
     expect(first_score["cols"]).to eq 3
     expect(first_score["rows"]).to eq 3
-    expect(first_score["date"]).to eq '2014-02-02'
+    expect(first_score["date"]).to eq Date.today.strftime("%Y-%m-%d")
     expect(first_score["difficulty"]).to eq 1
     expect(first_score["game_mode"]).to eq "0"
     expect(first_score["moves"]).to eq 20
@@ -109,7 +109,7 @@ RSpec.describe "game score" do
     expect(second_score["game_id"]).to eq 'awesomegame3'
     expect(second_score["cols"]).to eq 4
     expect(second_score["rows"]).to eq 4
-    expect(second_score["date"]).to eq '2014-02-02'
+    expect(second_score["date"]).to eq Date.today.strftime("%Y-%m-%d")
     expect(second_score["difficulty"]).to eq 3
     expect(second_score["game_mode"]).to eq "0"
     expect(second_score["moves"]).to eq 40
