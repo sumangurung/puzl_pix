@@ -1,6 +1,7 @@
 class Player < ActiveRecord::Base
   has_many :device_tokens, foreign_key: "fb_id"
   has_many :scores, primary_key: 'uuid', foreign_key: "player_uuid", class_name: "Persistence::Score"
+  validates :username, uniqueness: true
 
   def add_device_token(device_token)
     device_tokens.create(token: device_token)
@@ -11,15 +12,6 @@ class Player < ActiveRecord::Base
       [first_name, last_name].join(" ")
     else
       "Player #{id}"
-    end
-  end
-
-  def username
-    attr_value = read_attribute(:username)
-    if attr_value.blank?
-      "Player #{self.id}"
-    else
-      attr_value
     end
   end
 end

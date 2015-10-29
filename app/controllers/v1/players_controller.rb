@@ -2,8 +2,12 @@ module V1
   class PlayersController < ApplicationController
 
     def create
-      @player = Player.create!(player_params)
-      render template: '/players/show', status: :created
+      @player = PlayerCreator.create(player_params)
+      if @player.errors.empty?
+        render template: '/players/show', status: :created
+      else
+        render template: '/players/show', status: :unprocessable_entity
+      end
     end
 
     def show

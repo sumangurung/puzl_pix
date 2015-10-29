@@ -50,7 +50,30 @@ RSpec.describe "player registration info" do
     expect(response.status).to eq 201
     player = JSON.parse(response.body)['player']
     player_record = Player.find_by(uuid: "123abc")
-    expect(player['username']).to eq("Player #{player_record.id}")
+    expect(player['username']).to match(/\APlayer .*#{player_record.id}\Z/)
+  end
+
+  it "players have unique usernames" do
+    player_params = {
+      player: { uuid: "123abc", fb_id: "123", first_name: "Jimmy", last_name: "Johnson", username: "" }
+    }.to_json
+
+    post '/v1/players', player_params, request_headers
+
+    expect(response.status).to eq 201
+    player = JSON.parse(response.body)['player']
+    player_record = Player.find_by(uuid: "123abc")
+    expect(player['username']).to match(/\APlayer .*#{player_record.id}\Z/)
+
+    second_player_params = {
+      player: { uuid: "234abc", first_name: "James", last_name: "Milner", username: player['username'] }
+    }.to_json
+
+    require 'pry'
+    post '/v1/players', second_player_params, request_headers
+    expect(response.status).to eq 422
+    errors = JSON.parse(response.body)['player']['errors']
+    expect(errors['username']).to eq(["has already been taken"])
   end
 
   it "updates a player record" do
