@@ -25,7 +25,7 @@ describe PlayerCreator do
       }
       player = PlayerCreator.create(params)
       expect(player.id).to be
-      expect(player.username).to match(/\APlayer.*#{player.id}\Z/)
+      expect(player.username).to match(/\APlayer [0-9\.]*\Z/)
     end
   end
 end

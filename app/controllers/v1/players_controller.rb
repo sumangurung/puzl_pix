@@ -20,7 +20,7 @@ module V1
       if @player.update_attributes(player_params)
         render template: '/players/show', status: :ok
       else
-        head :unprocessable_entity
+        render template: '/players/show', status: :unprocessable_entity
       end
     end
 

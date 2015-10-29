@@ -50,7 +50,7 @@ RSpec.describe "player registration info" do
     expect(response.status).to eq 201
     player = JSON.parse(response.body)['player']
     player_record = Player.find_by(uuid: "123abc")
-    expect(player['username']).to match(/\APlayer .*#{player_record.id}\Z/)
+    expect(player['username']).to match(/\APlayer [0-9\.]*\Z/)
   end
 
   it "players have unique usernames" do
@@ -63,7 +63,7 @@ RSpec.describe "player registration info" do
     expect(response.status).to eq 201
     player = JSON.parse(response.body)['player']
     player_record = Player.find_by(uuid: "123abc")
-    expect(player['username']).to match(/\APlayer .*#{player_record.id}\Z/)
+    expect(player['username']).to match(/\APlayer [0-9\.]*\Z/)
 
     second_player_params = {
       player: { uuid: "234abc", first_name: "James", last_name: "Milner", username: player['username'] }
@@ -90,6 +90,30 @@ RSpec.describe "player registration info" do
     expect(player['first_name']).to eq("Jimmy")
     expect(player['last_name']).to eq("Johnson")
     expect(player['username']).to eq("jj")
+  end
+
+  it "responds with error if the username is updated to be blank" do
+    player_params = { player: { uuid: "123abc", fb_id: "123", first_name: "Jimmy", last_name: "Johnson", username: "jj" } }.to_json
+    post '/v1/players', player_params, request_headers
+
+    updated_player_params = { player: { username: "" } }.to_json
+    put '/v1/players/123abc', updated_player_params, request_headers
+
+    expect(response.status).to eq 422
+    errors = JSON.parse(response.body)['player']['errors']
+    expect(errors['username']).to include("can't be blank")
+  end
+
+  it "responds with error if the username is not unique" do
+    PlayerCreator.create!(uuid: '123123', username: 'kk')
+    PlayerCreator.create!(uuid: '123abc', username: 'jj')
+
+    updated_player_params = { player: { username: "kk" } }.to_json
+    put '/v1/players/123abc', updated_player_params, request_headers
+
+    expect(response.status).to eq 422
+    errors = JSON.parse(response.body)['player']['errors']
+    expect(errors['username']).to include("has already been taken")
   end
 
   it "returns the json of the player information" do

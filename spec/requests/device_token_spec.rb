@@ -15,7 +15,7 @@ RSpec.describe 'store device token for user' do
       "Authorization" => "Token token=#{token}"
     }
 
-    Player.create( uuid: 'abc123')
+    PlayerCreator.create( uuid: 'abc123')
     device_token = "123abc456dev"
     device_token_params = { device_token: device_token }.to_json
     post "/v1/players/abc123/device_tokens", device_token_params, request_headers
