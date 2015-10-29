@@ -73,7 +73,7 @@ RSpec.describe "player registration info" do
     post '/v1/players', second_player_params, request_headers
     expect(response.status).to eq 422
     errors = JSON.parse(response.body)['player']['errors']
-    expect(errors['username']).to eq(["has already been taken"])
+    expect(errors).to include("Username has already been taken")
   end
 
   it "updates a player record" do
@@ -101,7 +101,7 @@ RSpec.describe "player registration info" do
 
     expect(response.status).to eq 422
     errors = JSON.parse(response.body)['player']['errors']
-    expect(errors['username']).to include("can't be blank")
+    expect(errors).to include("Username can't be blank")
   end
 
   it "responds with error if the username is not unique" do
@@ -113,7 +113,7 @@ RSpec.describe "player registration info" do
 
     expect(response.status).to eq 422
     errors = JSON.parse(response.body)['player']['errors']
-    expect(errors['username']).to include("has already been taken")
+    expect(errors).to include("Username has already been taken")
   end
 
   it "returns the json of the player information" do
