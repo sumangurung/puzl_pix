@@ -14,7 +14,7 @@ class PlayerCreator
   def self.instantiate_and_return_player(player_params)
     player = Player.new(player_params)
     if player.username.blank?
-      player.username = "Player #{Time.now.to_f}"
+      player.username = "Player #{Time.now.to_i}"
     end
 
     yield(player)

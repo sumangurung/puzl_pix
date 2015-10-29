@@ -25,8 +25,8 @@ RSpec.describe "Challenge friends" do
         }
       }
 
-      PlayerCreator.create!(uuid: "abc", fb_id: 'fbid1')
-      PlayerCreator.create!(uuid: "def", fb_id: 'fbid2')
+      PlayerCreator.create!(uuid: "abc", fb_id: 'fbid1', username: 'jj')
+      PlayerCreator.create!(uuid: "def", fb_id: 'fbid2', username: 'kk')
 
       post '/v1/challenges', challenge_params.to_json, request_headers
 
