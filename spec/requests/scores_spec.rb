@@ -30,7 +30,7 @@ RSpec.describe "game score" do
         game_id: 'awesomegame1',
         cols: '3',
         date: Date.today,
-        difficulty: "very",
+        game_level: "very",
         game_mode: "0",
         moves: "20",
         rows: '3',
@@ -66,7 +66,7 @@ RSpec.describe "game score" do
       game_id: 'awesomegame1',
       cols: '3',
       date: Date.today,
-      difficulty: "1",
+      game_level: "1",
       game_mode: "0",
       moves: "20",
       rows: '3',
@@ -78,7 +78,7 @@ RSpec.describe "game score" do
       game_id: 'awesomegame3',
       cols: '4',
       date: Date.today,
-      difficulty: "3",
+      game_level: "3",
       game_mode: "0",
       moves: "40",
       rows: '4',
@@ -98,7 +98,7 @@ RSpec.describe "game score" do
     expect(first_score["cols"]).to eq 3
     expect(first_score["rows"]).to eq 3
     expect(first_score["date"]).to eq Date.today.strftime("%Y-%m-%d")
-    expect(first_score["difficulty"]).to eq 1
+    expect(first_score["game_level"]).to eq 1
     expect(first_score["game_mode"]).to eq "0"
     expect(first_score["moves"]).to eq 20
     expect(first_score["time"]).to eq 140
@@ -110,7 +110,7 @@ RSpec.describe "game score" do
     expect(second_score["cols"]).to eq 4
     expect(second_score["rows"]).to eq 4
     expect(second_score["date"]).to eq Date.today.strftime("%Y-%m-%d")
-    expect(second_score["difficulty"]).to eq 3
+    expect(second_score["game_level"]).to eq 3
     expect(second_score["game_mode"]).to eq "0"
     expect(second_score["moves"]).to eq 40
     expect(second_score["time"]).to eq 340

@@ -7,7 +7,7 @@ json.scores @scores do |score|
   json.game_id score.game_id
   json.cols score.cols
   json.rows score.cols
-  json.difficulty score.difficulty
+  json.game_level score.game_level
   json.game_mode score.game_mode
   json.moves score.moves
   json.time score.time

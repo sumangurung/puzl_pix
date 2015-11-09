@@ -11,7 +11,7 @@ module Scores
     def execute
       relation = apply_player_filter(@relation)
       relation = apply_game_mode_filter(relation)
-      relation = apply_game_difficulty_filter(relation)
+      relation = apply_game_game_level_filter(relation)
       relation = apply_sort_order(relation)
       relation = apply_filter_scores_older_than_1_week(relation)
       relation
@@ -35,9 +35,9 @@ module Scores
       end
     end
 
-    def apply_game_difficulty_filter(relation)
-      unless @params[:difficulty].blank?
-        relation.where(difficulty: @params[:difficulty])
+    def apply_game_game_level_filter(relation)
+      unless @params[:game_level].blank?
+        relation.where(game_level: @params[:game_level])
       else
         relation
       end

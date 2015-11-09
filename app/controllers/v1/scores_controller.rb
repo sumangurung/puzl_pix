@@ -13,7 +13,7 @@ module V1
     private
     def score_params
       permitted_attributes = %i(player_uuid player_id game_id cols rows
-      date difficulty game_mode moves time)
+      date game_level game_mode moves time)
       params.require(:score).permit(*permitted_attributes)
     end
   end

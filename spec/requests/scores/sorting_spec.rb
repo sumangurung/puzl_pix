@@ -22,7 +22,7 @@ RSpec.describe "game score" do
       Persistence::Score.create(
         player_uuid: '123',
         game_id: 'awesomegame1',
-        difficulty: "1",
+        game_level: "1",
         game_mode: "0",
         moves: "20",
         time: '440'
@@ -31,7 +31,7 @@ RSpec.describe "game score" do
       Persistence::Score.create(
         player_uuid: '323',
         game_id: 'awesomegame2',
-        difficulty: "1",
+        game_level: "1",
         game_mode: "0",
         moves: "20",
         time: '640'
@@ -40,7 +40,7 @@ RSpec.describe "game score" do
       Persistence::Score.create(
         player_uuid: '234',
         game_id: 'awesomegame3',
-        difficulty: "3",
+        game_level: "3",
         game_mode: "0",
         moves: "40",
         time: '340'
@@ -63,7 +63,7 @@ RSpec.describe "game score" do
       Persistence::Score.create(
         player_uuid: '123',
         game_id: 'awesomegame1',
-        difficulty: "1",
+        game_level: "1",
         game_mode: "1",
         moves: "20",
         time: '440'
@@ -72,7 +72,7 @@ RSpec.describe "game score" do
       Persistence::Score.create(
         player_uuid: '323',
         game_id: 'awesomegame2',
-        difficulty: "1",
+        game_level: "1",
         game_mode: "1",
         moves: "50",
         time: '640'
@@ -81,7 +81,7 @@ RSpec.describe "game score" do
       Persistence::Score.create(
         player_uuid: '234',
         game_id: 'awesomegame3',
-        difficulty: "3",
+        game_level: "3",
         game_mode: "1",
         moves: "40",
         time: '340'

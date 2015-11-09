@@ -35,7 +35,7 @@ RSpec.describe "game score" do
       game_id: 'awesomegame1',
       cols: '3',
       date: 8.days.ago.to_date,
-      difficulty: "1",
+      game_level: "1",
       game_mode: "0",
       moves: "20",
       rows: '3',
@@ -47,7 +47,7 @@ RSpec.describe "game score" do
       game_id: 'awesomegame2',
       cols: '4',
       date: 7.days.ago.to_date,
-      difficulty: "1",
+      game_level: "1",
       game_mode: "0",
       moves: "40",
       rows: '4',
@@ -59,7 +59,7 @@ RSpec.describe "game score" do
       game_id: 'awesomegame3',
       cols: '4',
       date: 6.days.ago.to_date,
-      difficulty: "1",
+      game_level: "1",
       game_mode: "0",
       moves: "30",
       rows: '4',
@@ -83,7 +83,7 @@ RSpec.describe "game score" do
     expect(second_score["username"]).to eq player2.username
     expect(second_score["game_id"]).to eq 'awesomegame2'
     expect(second_score["date"]).to eq 7.days.ago.strftime("%Y-%m-%d")
-    expect(second_score["difficulty"]).to eq 1
+    expect(second_score["game_level"]).to eq 1
     expect(second_score["game_mode"]).to eq "0"
     expect(second_score["time"]).to eq 340
   end
