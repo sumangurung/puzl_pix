@@ -14,6 +14,7 @@ module Scores
       relation = apply_game_game_level_filter(relation)
       relation = apply_sort_order(relation)
       relation = apply_filter_scores_older_than_1_week(relation)
+      relation = apply_limit(relation)
       relation
     end
 
@@ -56,6 +57,10 @@ module Scores
 
     def apply_filter_scores_older_than_1_week(relation)
       relation.where('date >= ?', 1.week.ago.to_date)
+    end
+
+    def apply_limit(relation)
+      relation.limit(Rails.configuration.scores_limit)
     end
   end
 end
