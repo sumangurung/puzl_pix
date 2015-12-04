@@ -37,8 +37,9 @@ module Scores
     end
 
     def apply_game_game_level_filter(relation)
-      unless @params[:game_level].blank?
-        relation.where(game_level: @params[:game_level])
+      level = @params[:game_level] || @params[:gameLevel]
+      unless level.blank?
+        relation.where(game_level: level)
       else
         relation
       end
