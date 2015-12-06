@@ -15,6 +15,10 @@ RSpec.describe "game score" do
     allow(Authentication).to receive(:valid_key?)
       .with(token)
       .and_return(true)
+
+    PlayerCreator.create!(uuid: '123', username: 'kk')
+    PlayerCreator.create!(uuid: '323', username: 'jj')
+    PlayerCreator.create!(uuid: '234', username: 'll')
   end
 
   context "for timed games" do
