@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "game score" do
+RSpec.describe "filters score without player" do
   let(:token) { 'abc123' }
 
   let(:request_headers) do
@@ -17,7 +17,6 @@ RSpec.describe "game score" do
       .and_return(true)
 
     PlayerCreator.create!(uuid: '123', username: 'kk')
-    PlayerCreator.create!(uuid: '234', username: 'jj')
 
     Persistence::Score.create(
       player_uuid: '123',
@@ -44,7 +43,7 @@ RSpec.describe "game score" do
     )
   end
 
-  it "allows filter by gameLevel" do
+  it "filters out scores with player record" do
     get '/v1/scores', { gameLevel: "1" }, request_headers
     expect(response.status).to eq 200
     scores = JSON.parse(response.body)['scores']
@@ -52,11 +51,12 @@ RSpec.describe "game score" do
     score = scores.first
     expect(score["game_level"]).to eq 1
 
-    get '/v1/scores', { game_level: '3' }, request_headers
+    get '/v1/scores', {}, request_headers
     expect(response.status).to eq 200
     scores = JSON.parse(response.body)['scores']
     expect(scores.length).to eq 1
     score = scores.first
-    expect(score["game_level"]).to eq 3
+    expect(score["game_level"]).to eq 1
+    expect(score["username"]).to eq 'kk'
   end
 end

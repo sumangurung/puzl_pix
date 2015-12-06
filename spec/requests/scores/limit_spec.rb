@@ -22,12 +22,14 @@ RSpec.describe "game score" do
       .and_return(2)
     player1 = Player.create(
       uuid: SecureRandom.uuid,
+      username: 'jd',
       first_name: "John",
       last_name: "Doe",
     )
 
     player2 = Player.create(
       uuid: SecureRandom.uuid,
+      username: 'ss',
       first_name: "Susan",
       last_name: "Smith"
     )
