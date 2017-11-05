@@ -1,6 +1,4 @@
-set :application, "puzlpix"
 set :repo_url,  "git@puzlpix-bitbucket.org:superclassllc/puzlpix_api.git"
-set :deploy_to,  "/var/www/html/puzlpix"
 set :log_level, :debug
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
@@ -14,10 +12,15 @@ role :app, %w{ec2-user@puzlpix.com}
 role :web, %w{ec2-user@puzlpix.com}
 role :db,  %w{ec2-user@puzlpix.com}
 
+after 'deploy:publishing', 'deploy:restart'
+
 namespace :deploy do
-  task :start do ; end
-  task :stop do ; end
   task :restart do
-    invoke 'unicorn:restart'
+    invoke 'unicorn:stop'
+    invoke 'unicorn:reload'
+  end
+
+  task :stop do
+    invoke 'unicorn:stop'
   end
 end
