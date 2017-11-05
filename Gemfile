@@ -5,6 +5,7 @@ gem 'rails', '~> 5.0.0'
 gem 'apns'
 gem 'pg'
 gem 'mysql2'
+gem 'unicorn'
 
 group :development, :test do
   gem 'spring'
@@ -14,7 +15,6 @@ group :development, :test do
   gem 'pry-remote'
   gem 'pry-stack_explorer'
   gem 'pry-byebug'
-  gem 'unicorn'
 
   gem 'capistrano'
   gem 'capistrano-bundler'
