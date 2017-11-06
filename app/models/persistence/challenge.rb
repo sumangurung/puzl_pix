@@ -11,6 +11,6 @@ module Persistence
       challenge_ar.save!
     end
 
-    has_many :challengees, class_name: "Persistence::Challengee"
+    has_many :challengees, class_name: "Challengee"
   end
 end

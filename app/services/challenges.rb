@@ -1,7 +1,7 @@
 require 'arel'
 module Challenges
   def self.fetch(fb_id)
-    challengees_table = Arel::Table.new(Persistence::Challengee.table_name)
+    challengees_table = Arel::Table.new(Challengee.table_name)
     Persistence::Challenge.joins(:challengees)
       .where(challengees_table[:fb_id].eq(fb_id))
   end
