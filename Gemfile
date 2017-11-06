@@ -7,7 +7,7 @@ gem 'pg'
 gem 'mysql2'
 gem 'unicorn'
 
-group :development, :test do
+group :development do
   gem 'spring'
   gem 'rspec-rails', '~> 3.0'
   gem 'rspec-mocks'

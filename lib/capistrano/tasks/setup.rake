@@ -1,6 +1,6 @@
 namespace :setup do
 
-  desc "Upload database.yml file."
+  desc "Upload database.yml secrets.yml files."
   task :upload_yml do
     on roles(:app) do
       execute "mkdir -p #{shared_path}/config"
@@ -20,14 +20,14 @@ namespace :setup do
     end
   end
 
-  desc "Symlinks config files for Nginx and Unicorn."
-  task :symlink_config do
-    on roles(:app) do
-      execute "rm -f /etc/nginx/sites-enabled/default"
-
-      execute "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{fetch(:application)}"
-      execute "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{fetch(:application)}"
-   end
-  end
+  # desc "Symlinks config files for Nginx and Unicorn."
+  # task :symlink_config do
+  #   on roles(:app) do
+  #     execute "rm -f /etc/nginx/sites-enabled/default"
+  #
+  #     execute "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{fetch(:application)}"
+  #     execute "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{fetch(:application)}"
+  #  end
+  # end
 
 end

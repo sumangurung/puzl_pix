@@ -1,4 +1,4 @@
-set :repo_url,  "git@puzlpix-bitbucket.org:superclassllc/puzlpix_api.git"
+set :repo_url,  "git@puzlpix-bitbucket.org:superclassllc/puzlpix_web.git"
 set :log_level, :debug
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
@@ -12,6 +12,7 @@ role :app, %w{ec2-user@puzlpix.com}
 role :web, %w{ec2-user@puzlpix.com}
 role :db,  %w{ec2-user@puzlpix.com}
 
+before 'deploy:starting', 'setup:upload_yml'
 after 'deploy:publishing', 'deploy:restart'
 
 namespace :deploy do
@@ -24,3 +25,9 @@ namespace :deploy do
     invoke 'unicorn:stop'
   end
 end
+
+set :ssh_options, {
+  keys: %w(~/.ssh/id_rsa_puzlpix-bitbucket ~/.ssh/Superclass.pem),
+  forward_agent: true,
+  auth_methods: %w(publickey)
+}
