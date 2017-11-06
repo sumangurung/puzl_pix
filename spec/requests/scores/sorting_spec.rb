@@ -23,7 +23,7 @@ RSpec.describe "game score" do
 
   context "for timed games" do
     before do
-      Persistence::Score.create(
+      Score.create(
         player_uuid: '123',
         game_id: 'awesomegame1',
         game_level: "1",
@@ -32,7 +32,7 @@ RSpec.describe "game score" do
         time: '440'
       )
 
-      Persistence::Score.create(
+      Score.create(
         player_uuid: '323',
         game_id: 'awesomegame2',
         game_level: "1",
@@ -41,7 +41,7 @@ RSpec.describe "game score" do
         time: '640'
       )
 
-      Persistence::Score.create(
+      Score.create(
         player_uuid: '234',
         game_id: 'awesomegame3',
         game_level: "3",
@@ -64,7 +64,7 @@ RSpec.describe "game score" do
 
   context "untimed game" do
     before do
-      Persistence::Score.create(
+      Score.create(
         player_uuid: '123',
         game_id: 'awesomegame1',
         game_level: "1",
@@ -73,7 +73,7 @@ RSpec.describe "game score" do
         time: '440'
       )
 
-      Persistence::Score.create(
+      Score.create(
         player_uuid: '323',
         game_id: 'awesomegame2',
         game_level: "1",
@@ -82,7 +82,7 @@ RSpec.describe "game score" do
         time: '640'
       )
 
-      Persistence::Score.create(
+      Score.create(
         player_uuid: '234',
         game_id: 'awesomegame3',
         game_level: "3",

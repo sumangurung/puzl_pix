@@ -18,7 +18,7 @@ RSpec.describe "filters score without player" do
 
     PlayerCreator.create!(uuid: '123', username: 'kk')
 
-    Persistence::Score.create(
+    Score.create(
       player_uuid: '123',
       game_id: 'awesomegame1',
       cols: '3',
@@ -30,7 +30,7 @@ RSpec.describe "filters score without player" do
       time: '140'
     )
 
-    Persistence::Score.create(
+    Score.create(
       player_uuid: '234',
       game_id: 'awesomegame3',
       cols: '4',
