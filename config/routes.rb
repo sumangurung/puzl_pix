@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  get 'apple-app-site-association', to: 'files#apple_app_site_association'
+
   namespace :v1 do
     resources :players, only: [:create, :update, :show] do
       resources :device_tokens, only: [:create]
