@@ -32,7 +32,7 @@ RSpec.describe "game score" do
       last_name: "Smith"
     )
 
-    Persistence::Score.create(
+    Score.create(
       player_uuid: player1.uuid,
       game_id: 'awesomegame1',
       cols: '3',
@@ -44,7 +44,7 @@ RSpec.describe "game score" do
       time: '140'
     )
 
-    Persistence::Score.create(
+    Score.create(
       player_uuid: player2.uuid,
       game_id: 'awesomegame2',
       cols: '4',
@@ -56,7 +56,7 @@ RSpec.describe "game score" do
       time: '340'
     )
 
-    Persistence::Score.create(
+    Score.create(
       player_uuid: player1.uuid,
       game_id: 'awesomegame3',
       cols: '4',

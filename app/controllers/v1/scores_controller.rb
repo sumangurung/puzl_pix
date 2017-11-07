@@ -3,7 +3,7 @@ require 'scores'
 module V1
   class ScoresController < ApplicationController
     def create
-      Persistence::Score.create!(score_params)
+      Score.create!(score_params)
       head :created
     end
 
