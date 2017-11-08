@@ -15,11 +15,15 @@ RSpec.describe "game score" do
     allow(Authentication).to receive(:valid_key?)
       .with(token)
       .and_return(true)
+
+    PlayerCreator.create!(uuid: '123', username: 'kk')
+    PlayerCreator.create!(uuid: '323', username: 'jj')
+    PlayerCreator.create!(uuid: '234', username: 'll')
   end
 
   context "for timed games" do
     before do
-      Persistence::Score.create(
+      Score.create(
         player_uuid: '123',
         game_id: 'awesomegame1',
         game_level: "1",
@@ -28,7 +32,7 @@ RSpec.describe "game score" do
         time: '440'
       )
 
-      Persistence::Score.create(
+      Score.create(
         player_uuid: '323',
         game_id: 'awesomegame2',
         game_level: "1",
@@ -37,7 +41,7 @@ RSpec.describe "game score" do
         time: '640'
       )
 
-      Persistence::Score.create(
+      Score.create(
         player_uuid: '234',
         game_id: 'awesomegame3',
         game_level: "3",
@@ -60,7 +64,7 @@ RSpec.describe "game score" do
 
   context "untimed game" do
     before do
-      Persistence::Score.create(
+      Score.create(
         player_uuid: '123',
         game_id: 'awesomegame1',
         game_level: "1",
@@ -69,7 +73,7 @@ RSpec.describe "game score" do
         time: '440'
       )
 
-      Persistence::Score.create(
+      Score.create(
         player_uuid: '323',
         game_id: 'awesomegame2',
         game_level: "1",
@@ -78,7 +82,7 @@ RSpec.describe "game score" do
         time: '640'
       )
 
-      Persistence::Score.create(
+      Score.create(
         player_uuid: '234',
         game_id: 'awesomegame3',
         game_level: "3",

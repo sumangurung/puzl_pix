@@ -14,6 +14,7 @@ module Scores
       relation = apply_game_game_level_filter(relation)
       relation = apply_sort_order(relation)
       relation = apply_filter_scores_older_than_1_week(relation)
+      relation = apply_filter_to_filter_out_scores_without_player_record(relation)
       relation = apply_limit(relation)
       relation
     end
@@ -62,6 +63,10 @@ module Scores
 
     def apply_limit(relation)
       relation.limit(Rails.configuration.scores_limit)
+    end
+
+    def apply_filter_to_filter_out_scores_without_player_record(relation)
+      relation.joins(:player).where("players.username IS NOT NULL")
     end
   end
 end

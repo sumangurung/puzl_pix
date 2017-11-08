@@ -15,8 +15,10 @@ RSpec.describe "game score" do
     allow(Authentication).to receive(:valid_key?)
       .with(token)
       .and_return(true)
+    PlayerCreator.create!(uuid: '123', username: 'kk')
+    PlayerCreator.create!(uuid: '234', username: 'jj')
 
-    Persistence::Score.create(
+    Score.create(
       player_uuid: '123',
       game_id: 'awesomegame1',
       cols: '3',
@@ -28,7 +30,7 @@ RSpec.describe "game score" do
       time: '140'
     )
 
-    Persistence::Score.create(
+    Score.create(
       player_uuid: '234',
       game_id: 'awesomegame3',
       cols: '4',

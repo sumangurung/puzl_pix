@@ -22,17 +22,19 @@ RSpec.describe "game score" do
       .and_return(2)
     player1 = Player.create(
       uuid: SecureRandom.uuid,
+      username: 'jd',
       first_name: "John",
       last_name: "Doe",
     )
 
     player2 = Player.create(
       uuid: SecureRandom.uuid,
+      username: 'ss',
       first_name: "Susan",
       last_name: "Smith"
     )
 
-    Persistence::Score.create(
+    Score.create(
       player_uuid: player1.uuid,
       game_id: 'awesomegame1',
       cols: '3',
@@ -44,7 +46,7 @@ RSpec.describe "game score" do
       time: '140'
     )
 
-    Persistence::Score.create(
+    Score.create(
       player_uuid: player2.uuid,
       game_id: 'awesomegame2',
       cols: '4',
@@ -56,7 +58,7 @@ RSpec.describe "game score" do
       time: '340'
     )
 
-    Persistence::Score.create(
+    Score.create(
       player_uuid: player1.uuid,
       game_id: 'awesomegame3',
       cols: '4',
