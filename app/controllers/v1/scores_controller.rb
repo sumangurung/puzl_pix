@@ -3,8 +3,14 @@ require 'scores'
 module V1
   class ScoresController < ApplicationController
     def create
-      Score.create!(score_params)
-      head :created
+      begin
+        p = score_params(params[:score])
+        Score.create!(p)
+        head :created
+      rescue Exception => e
+        logger.debug "Error: could not create a score: #{e}"
+        head 400
+      end
     end
 
     def index
@@ -13,10 +19,10 @@ module V1
     end
 
     private
-    def score_params
-      permitted_attributes = %i(player_uuid player_id game_id cols rows
+    def score_params(score)
+      permitted_attributes = %i(uuid player_uuid player_id game_id cols rows
       date game_level game_mode moves time gameLevel)
-      params.require(:score).permit(*permitted_attributes)
+      score.permit(*permitted_attributes)
     end
   end
 end

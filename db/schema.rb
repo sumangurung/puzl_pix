@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151109010533) do
+ActiveRecord::Schema.define(version: 20171016002615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,10 +52,9 @@ ActiveRecord::Schema.define(version: 20151109010533) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "uuid",       null: false
+    t.index ["username"], name: "index_players_on_username", unique: true, using: :btree
+    t.index ["uuid"], name: "index_players_on_uuid", unique: true, using: :btree
   end
-
-  add_index "players", ["username"], name: "index_players_on_username", unique: true, using: :btree
-  add_index "players", ["uuid"], name: "index_players_on_uuid", unique: true, using: :btree
 
   create_table "scores", force: :cascade do |t|
     t.date     "date"
@@ -71,8 +69,8 @@ ActiveRecord::Schema.define(version: 20151109010533) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "player_uuid", null: false
+    t.string   "uuid",        null: false
+    t.index ["game_mode"], name: "index_scores_on_game_mode", using: :btree
   end
-
-  add_index "scores", ["game_mode"], name: "index_scores_on_game_mode", using: :btree
 
 end

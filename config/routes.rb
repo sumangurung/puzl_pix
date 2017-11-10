@@ -2,6 +2,21 @@ Rails.application.routes.draw do
 
   get 'apple-app-site-association', to: 'files#apple_app_site_association'
 
+  namespace :v2 do
+    resources :players, only: [:create, :update, :show] do
+      resources :device_tokens, only: [:create]
+    end
+
+    resources :scores, only: [:create, :index, :create_bulk] do
+      # match :batch_create, via: [:post],  on: :collection
+      collection do # v2/scores/create_bulk
+        post :create_bulk
+      end
+    end
+
+    resources :challenges, only: [:create, :index]
+  end
+
   namespace :v1 do
     resources :players, only: [:create, :update, :show] do
       resources :device_tokens, only: [:create]
@@ -9,6 +24,7 @@ Rails.application.routes.draw do
     resources :scores, only: [:create, :index]
     resources :challenges, only: [:create, :index]
   end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
