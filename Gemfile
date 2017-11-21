@@ -6,6 +6,7 @@ gem 'apns'
 gem 'pg'
 gem 'mysql2'
 gem 'unicorn'
+gem 'jbuilder'
 
 group :development do
   gem 'spring'
