@@ -5,7 +5,7 @@
     ],
     "details": [
       {
-        "appID": "LEJ8BD475V.SuperclassLLC.PuzlPix",
+        "appID": "LEJ8BD475V.com.SuperclassLLC.PuzlPix",
         "paths": [
           "*"
         ]
