@@ -40,14 +40,12 @@ module V2
 
     private
     def bulk_scores_params()
-      permitted_attributes = %i(uuid player_uuid player_id game_id cols rows
-      date game_level game_mode moves time gameLevel)
+      permitted_attributes = Score.permitted_attributes
       params.permit(scores: permitted_attributes)
     end
 
     def score_params(score)
-      permitted_attributes = %i(uuid player_uuid player_id game_id cols rows
-      date game_level game_mode moves time gameLevel)
+      permitted_attributes = Score.permitted_attributes
       score.permit(*permitted_attributes)
     end
   end
