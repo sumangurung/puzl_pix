@@ -12,43 +12,41 @@
 
 ActiveRecord::Schema.define(version: 20171116210509) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "api_keys", force: :cascade do |t|
+  create_table "api_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "challengees", force: :cascade do |t|
+  create_table "challengees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "fb_id"
     t.integer  "challenge_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "challenges", force: :cascade do |t|
-    t.date     "date",           null: false
-    t.string   "picture_url",    null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "player_id",      null: false
-    t.integer  "score_id",       null: false
-    t.text     "sequence",       null: false
-    t.string   "unique_path_id", null: false
+  create_table "challenges", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date     "date",                         null: false
+    t.string   "picture_url",                  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "player_id",                    null: false
+    t.integer  "score_id",                     null: false
+    t.text     "sequence",       limit: 65535, null: false
+    t.string   "unique_path_id",               null: false
+    t.string   "picture_name",                 null: false
     t.index ["player_id"], name: "index_challenges_on_player_id", using: :btree
     t.index ["score_id"], name: "index_challenges_on_score_id", using: :btree
   end
 
-  create_table "device_tokens", force: :cascade do |t|
+  create_table "device_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "token"
     t.string   "fb_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "players", force: :cascade do |t|
+  create_table "players", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "fb_id"
     t.string   "first_name"
     t.string   "last_name"
@@ -60,7 +58,7 @@ ActiveRecord::Schema.define(version: 20171116210509) do
     t.index ["uuid"], name: "index_players_on_uuid", unique: true, using: :btree
   end
 
-  create_table "scores", force: :cascade do |t|
+  create_table "scores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "date"
     t.integer  "player_id"
     t.string   "game_id"
