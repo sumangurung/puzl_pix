@@ -44,6 +44,7 @@ module V2
       params.require(:challenge).permit(
         :date,
         :picture_url,
+        :picture_name,
         :player_id,
         :score_id,
         :sequence,

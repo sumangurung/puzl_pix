@@ -4,6 +4,7 @@ class ChangeChallengesTable < ActiveRecord::Migration[5.0]
     add_column :challenges, :score_id, :integer, null: false, unique: true
     add_column :challenges, :sequence, :text, null: false
     add_column :challenges, :unique_path_id, :string, null: false, unique: true
+    add_column(:challenges, :picture_name, :string, null: false, unique:false)
 
     change_column_null(:challenges, :date, false)
     change_column_null(:challenges, :picture_url, false)
