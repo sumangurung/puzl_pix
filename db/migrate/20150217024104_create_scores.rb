@@ -1,4 +1,4 @@
-class CreateScores < ActiveRecord::Migration
+class CreateScores < ActiveRecord::Migration[5.0]
   def change
     create_table :scores do |t|
       t.date :date

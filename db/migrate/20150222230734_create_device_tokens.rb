@@ -1,4 +1,4 @@
-class CreateDeviceTokens < ActiveRecord::Migration
+class CreateDeviceTokens < ActiveRecord::Migration[5.0]
   def change
     create_table :device_tokens do |t|
       t.string :token

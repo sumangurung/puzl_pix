@@ -1,4 +1,4 @@
-class CreateChallengees < ActiveRecord::Migration
+class CreateChallengees < ActiveRecord::Migration[5.0]
   def change
     create_table :challengees do |t|
       t.string :fb_id
