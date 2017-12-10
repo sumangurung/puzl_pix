@@ -7,6 +7,7 @@ module V2
       request.parameters
     end
 
+    # POST	/challenges challenges#create	create a new challenge
     def create
       retries ||= 0
 
@@ -14,16 +15,26 @@ module V2
         scoreUuid = params[:challenge][:score][:uuid]
 
         score = Score.find_or_create_by(uuid:scoreUuid) do |score|
-          score.update_attributes(params[:score])
+          score.update_attributes(params[:challenge][:score])
         end
 
-        player = Player.find_by(uuid:params[:challenge][:player][:uuid])
-        p = challenge_params().merge(
+        player = Player.find_or_create_by(uuid:params[:challenge][:player][:uuid]) do |player|
+          player.update_attributes(params[:challenge][:player])
+        end
+
+        p = params[:challenge].merge(
           score_id: score.id,
           player_id: player.id
         )
 
-        Challenges.create!(p)
+        # remove score and player objects
+        p.except!(:score, :player)
+
+        # logger.debug "Score is: #{score.to_json}"
+        # logger.debug "Player is: #{player.to_json}"
+        # logger.debug "Params is: #{p.to_json}"
+
+        Challenge.create!(p)
         head :created
 
       rescue ActiveRecord::RecordNotUnique => e
