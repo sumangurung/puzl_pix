@@ -1,5 +1,7 @@
 module V2
   class ChallengesController < ApplicationController
+    skip_before_action :authenticate_request, only: [:show]
+
     # disable strong params for now
     def params
       request.parameters
