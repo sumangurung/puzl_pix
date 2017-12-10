@@ -52,6 +52,12 @@ module V2
       render template: 'challenges/index'
     end
 
+    # /challenges/:id	challenges#show
+    def show
+      @challenge = Challenge.includes(:score, :player).where(unique_path_id: params[:id]).first
+      logger.debug "Challenge is: #{@challenge.to_json}"
+      render template: '/challenges/show', status: :ok
+     end
 
     private
     # def score_params
