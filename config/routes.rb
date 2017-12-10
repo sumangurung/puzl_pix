@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :challenges, only: [:create, :index]
+    resources :challenges, only: [:create, :index, :show]
   end
 
   namespace :v1 do
