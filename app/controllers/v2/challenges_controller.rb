@@ -1,5 +1,10 @@
 module V2
   class ChallengesController < ApplicationController
+    # disable strong params for now
+    def params
+      request.parameters
+    end
+
     def create
       retries ||= 0
 
@@ -34,22 +39,23 @@ module V2
       render template: 'challenges/index'
     end
 
-    private
-    def score_params
-      permitted_attributes = Score.permitted_attributes
-      return score.permit(*permitted_attributes)
-    end
 
-    def challenge_params
-      params.require(:challenge).permit(
-        :date,
-        :picture_url,
-        :picture_name,
-        :player_id,
-        :score_id,
-        :sequence,
-        :unique_path_id
-      )
-    end
+    private
+    # def score_params
+    #   permitted_attributes = Score.permitted_attributes
+    #   return score.permit(*permitted_attributes)
+    # end
+    #
+    # def challenge_params
+    #   params.require(:challenge).permit(
+    #     :date,
+    #     :picture_url,
+    #     :picture_name,
+    #     :player,
+    #     :score,
+    #     :sequence,
+    #     :unique_path_id
+    #   )
+    # end
   end
 end
