@@ -2,7 +2,7 @@ class ApplicationController < ActionController::API
   include ActionController::MimeResponds
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
-  before_filter :authenticate_request
+  before_action :authenticate_request
 
   rescue_from 'ActiveRecord::RecordNotFound' do |exception|
     head :not_found
