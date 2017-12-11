@@ -10,69 +10,78 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171116210509) do
+ActiveRecord::Schema.define(version: 20150222230734) do
 
   create_table "api_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "token"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "challengees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "fb_id"
-    t.integer  "challenge_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "challenges", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.date     "date",                         null: false
-    t.string   "picture_url",                  null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.integer  "player_id",                    null: false
-    t.integer  "score_id",                     null: false
-    t.text     "sequence",       limit: 65535, null: false
-    t.string   "unique_path_id",               null: false
-    t.string   "picture_name",                 null: false
-    t.index ["player_id"], name: "index_challenges_on_player_id", using: :btree
+    t.date     "date",           null: false
+    t.string   "picture_url",    null: false
+    t.string   "user_id",        null: false
+    t.string   "integer",        null: false
+    t.string   "score_id",       null: false
+    t.string   "sequence",       null: false
+    t.string   "text",           null: false
+    t.string   "unique_path_id", null: false
+    t.string   "string",         null: false
+    t.string   "picture_name",   null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.index ["score_id"], name: "index_challenges_on_score_id", using: :btree
+    t.index ["unique_path_id"], name: "index_challenges_on_unique_path_id", using: :btree
+    t.index ["user_id"], name: "index_challenges_on_user_id", using: :btree
   end
 
   create_table "device_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "token"
     t.string   "fb_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "players", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "s", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "fb_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "username"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "uuid",       null: false
-    t.index ["username"], name: "index_players_on_username", unique: true, using: :btree
-    t.index ["uuid"], name: "index_players_on_uuid", unique: true, using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "scores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "date"
-    t.integer  "player_id"
-    t.string   "game_id"
+    t.integer  "user_id"
     t.integer  "cols"
     t.integer  "rows"
     t.integer  "game_level"
-    t.string   "game_mode"
+    t.integer  "game_mode"
     t.integer  "moves"
     t.integer  "time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "player_uuid", null: false
-    t.string   "uuid",        null: false
+    t.string   "user_uuid",  null: false
+    t.string   "uuid",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_level"], name: "index_scores_on_game_level", using: :btree
     t.index ["game_mode"], name: "index_scores_on_game_mode", using: :btree
+    t.index ["user_uuid"], name: "index_scores_on_user_uuid", using: :btree
+    t.index ["uuid"], name: "index_scores_on_uuid", using: :btree
+  end
+
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "fb_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "username"
+    t.string   "uuid",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
+    t.index ["uuid"], name: "index_users_on_uuid", unique: true, using: :btree
   end
 
 end

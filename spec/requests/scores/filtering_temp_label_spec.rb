@@ -16,11 +16,11 @@ RSpec.describe "game score" do
       .with(token)
       .and_return(true)
 
-    PlayerCreator.create!(uuid: '123', username: 'kk')
-    PlayerCreator.create!(uuid: '234', username: 'jj')
+    UserCreator.create!(uuid: '123', username: 'kk')
+    UserCreator.create!(uuid: '234', username: 'jj')
 
     Score.create(
-      player_uuid: '123',
+      user_uuid: '123',
       game_id: 'awesomegame1',
       cols: '3',
       date: Date.today,
@@ -32,7 +32,7 @@ RSpec.describe "game score" do
     )
 
     Score.create(
-      player_uuid: '234',
+      user_uuid: '234',
       game_id: 'awesomegame3',
       cols: '4',
       date: Date.today,

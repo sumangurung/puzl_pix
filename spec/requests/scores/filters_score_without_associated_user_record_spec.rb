@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "filters score without player" do
+RSpec.describe "filters score without user" do
   let(:token) { 'abc123' }
 
   let(:request_headers) do
@@ -16,10 +16,10 @@ RSpec.describe "filters score without player" do
       .with(token)
       .and_return(true)
 
-    PlayerCreator.create!(uuid: '123', username: 'kk')
+    UserCreator.create!(uuid: '123', username: 'kk')
 
     Score.create(
-      player_uuid: '123',
+      user_uuid: '123',
       game_id: 'awesomegame1',
       cols: '3',
       date: Date.today,
@@ -31,7 +31,7 @@ RSpec.describe "filters score without player" do
     )
 
     Score.create(
-      player_uuid: '234',
+      user_uuid: '234',
       game_id: 'awesomegame3',
       cols: '4',
       date: Date.today,
@@ -43,7 +43,7 @@ RSpec.describe "filters score without player" do
     )
   end
 
-  it "filters out scores with player record" do
+  it "filters out scores with user record" do
     get '/v1/scores', { gameLevel: "1" }, request_headers
     expect(response.status).to eq 200
     scores = JSON.parse(response.body)['scores']

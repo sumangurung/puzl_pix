@@ -15,14 +15,14 @@ RSpec.describe 'store device token for user' do
       "Authorization" => "Token token=#{token}"
     }
 
-    PlayerCreator.create( uuid: 'abc123')
+    UserCreator.create( uuid: 'abc123')
     device_token = "123abc456dev"
     device_token_params = { device_token: device_token }.to_json
-    post "/v1/players/abc123/device_tokens", device_token_params, request_headers
+    post "/v1/users/abc123/device_tokens", device_token_params, request_headers
 
     expect(response.status).to eq 201
 
-    player = Player.find_by uuid: "abc123"
-    expect(player.device_tokens.map(&:token)).to include(device_token)
+    user = User.find_by uuid: "abc123"
+    expect(user.device_tokens.map(&:token)).to include(device_token)
   end
 end

@@ -18,7 +18,7 @@ RSpec.describe "game score" do
   end
 
   it "stores the game score" do
-    player = Player.create(
+    user = User.create(
       uuid: SecureRandom.uuid,
       username: 'jd',
       first_name: 'John',
@@ -27,7 +27,7 @@ RSpec.describe "game score" do
 
     score_params = {
       score: {
-        player_uuid: player.uuid,
+        user_uuid: user.uuid,
         game_id: 'awesomegame1',
         cols: '3',
         date: Date.today,
@@ -50,14 +50,14 @@ RSpec.describe "game score" do
   end
 
   it "fetches the scores of all users" do
-    player1 = Player.create(
+    user1 = User.create(
       uuid: SecureRandom.uuid,
       username: "jd",
       first_name: "John",
       last_name: "Doe",
     )
 
-    player2 = Player.create(
+    user2 = User.create(
       uuid: SecureRandom.uuid,
       username: "ss",
       first_name: "Susan",
@@ -65,7 +65,7 @@ RSpec.describe "game score" do
     )
 
     Score.create(
-      player_uuid: player1.uuid,
+      user_uuid: user1.uuid,
       game_id: 'awesomegame1',
       cols: '3',
       date: Date.today,
@@ -77,7 +77,7 @@ RSpec.describe "game score" do
     )
 
     Score.create(
-      player_uuid: player2.uuid,
+      user_uuid: user2.uuid,
       game_id: 'awesomegame3',
       cols: '4',
       date: Date.today,
@@ -94,9 +94,9 @@ RSpec.describe "game score" do
     scores = JSON.parse(response.body)['scores']
     expect(scores.length).to eq 2
     first_score, second_score = scores
-    expect(first_score["player_uuid"]).to eq player1.uuid
-    expect(first_score["player_name"]).to eq player1.username
-    expect(first_score["username"]).to eq player1.username
+    expect(first_score["user_uuid"]).to eq user1.uuid
+    expect(first_score["user_name"]).to eq user1.username
+    expect(first_score["username"]).to eq user1.username
     expect(first_score["game_id"]).to eq 'awesomegame1'
     expect(first_score["cols"]).to eq 3
     expect(first_score["rows"]).to eq 3
@@ -106,9 +106,9 @@ RSpec.describe "game score" do
     expect(first_score["moves"]).to eq 20
     expect(first_score["time"]).to eq 140
 
-    expect(second_score["player_uuid"]).to eq player2.uuid
-    expect(second_score["player_name"]).to eq player2.username
-    expect(second_score["username"]).to eq player2.username
+    expect(second_score["user_uuid"]).to eq user2.uuid
+    expect(second_score["user_name"]).to eq user2.username
+    expect(second_score["username"]).to eq user2.username
     expect(second_score["game_id"]).to eq 'awesomegame3'
     expect(second_score["cols"]).to eq 4
     expect(second_score["rows"]).to eq 4

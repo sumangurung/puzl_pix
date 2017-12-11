@@ -3,7 +3,7 @@ json.challenges do
   json.created_at @challenge.created_at
   json.updated_at @challenge.updated_at
   json.picture_url @challenge.picture_url
-  json.player @challenge.player
+  json.user @challenge.user
   json.score @challenge.score
   json.sequence @challenge.sequence
   json.unique_path_id @challenge.unique_path_id

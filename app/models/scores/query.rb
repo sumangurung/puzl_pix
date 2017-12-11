@@ -9,21 +9,21 @@ module Scores
     end
 
     def execute
-      relation = apply_player_filter(@relation)
+      relation = apply_user_filter(@relation)
       relation = apply_game_mode_filter(relation)
       relation = apply_game_game_level_filter(relation)
       relation = apply_sort_order(relation)
       relation = apply_filter_scores_older_than_1_week(relation)
-      relation = apply_filter_to_filter_out_scores_without_player_record(relation)
+      relation = apply_filter_to_filter_out_scores_without_user_record(relation)
       relation = apply_limit(relation)
       relation
     end
 
     private
 
-    def apply_player_filter(relation)
-      unless @params[:player_uuid].blank?
-        relation.where(player_uuid: @params[:player_uuid])
+    def apply_user_filter(relation)
+      unless @params[:user_uuid].blank?
+        relation.where(user_uuid: @params[:user_uuid])
       else
         relation
       end
@@ -65,8 +65,8 @@ module Scores
       relation.limit(Rails.configuration.scores_limit)
     end
 
-    def apply_filter_to_filter_out_scores_without_player_record(relation)
-      relation.joins(:player).where("players.username IS NOT NULL")
+    def apply_filter_to_filter_out_scores_without_user_record(relation)
+      relation.joins(:user).where("users.username IS NOT NULL")
     end
   end
 end

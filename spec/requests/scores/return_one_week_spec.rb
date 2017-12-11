@@ -18,14 +18,14 @@ RSpec.describe "game score" do
   end
 
   it "fetches scores for one week only" do
-    player1 = Player.create(
+    user1 = User.create(
       uuid: SecureRandom.uuid,
       username: 'jd',
       first_name: "John",
       last_name: "Doe",
     )
 
-    player2 = Player.create(
+    user2 = User.create(
       uuid: SecureRandom.uuid,
       username: 'ss',
       first_name: "Susan",
@@ -33,7 +33,7 @@ RSpec.describe "game score" do
     )
 
     Score.create(
-      player_uuid: player1.uuid,
+      user_uuid: user1.uuid,
       game_id: 'awesomegame1',
       cols: '3',
       date: 8.days.ago.to_date,
@@ -45,7 +45,7 @@ RSpec.describe "game score" do
     )
 
     Score.create(
-      player_uuid: player2.uuid,
+      user_uuid: user2.uuid,
       game_id: 'awesomegame2',
       cols: '4',
       date: 7.days.ago.to_date,
@@ -57,7 +57,7 @@ RSpec.describe "game score" do
     )
 
     Score.create(
-      player_uuid: player1.uuid,
+      user_uuid: user1.uuid,
       game_id: 'awesomegame3',
       cols: '4',
       date: 6.days.ago.to_date,
@@ -74,15 +74,15 @@ RSpec.describe "game score" do
     scores = JSON.parse(response.body)['scores']
     expect(scores.length).to eq 2
     first_score, second_score = scores
-    expect(first_score["player_name"]).to eq player1.username
-    expect(first_score["username"]).to eq player1.username
+    expect(first_score["user_name"]).to eq user1.username
+    expect(first_score["username"]).to eq user1.username
     expect(first_score["game_id"]).to eq 'awesomegame3'
     expect(first_score["date"]).to eq 6.days.ago.strftime("%Y-%m-%d")
     expect(first_score["game_mode"]).to eq "0"
     expect(first_score["time"]).to eq 200
 
-    expect(second_score["player_name"]).to eq player2.username
-    expect(second_score["username"]).to eq player2.username
+    expect(second_score["user_name"]).to eq user2.username
+    expect(second_score["username"]).to eq user2.username
     expect(second_score["game_id"]).to eq 'awesomegame2'
     expect(second_score["date"]).to eq 7.days.ago.strftime("%Y-%m-%d")
     expect(second_score["game_level"]).to eq 1

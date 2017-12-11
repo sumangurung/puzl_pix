@@ -8,7 +8,7 @@ RSpec.describe "Challenge friends" do
   end
 
   describe "Store Challenges" do
-    it "stores a challenge request by a player" do
+    it "stores a challenge request by a user" do
       request_headers = {
         "Accept" => "application/json",
         "Content-Type" => "application/json",
@@ -25,8 +25,8 @@ RSpec.describe "Challenge friends" do
         }
       }
 
-      PlayerCreator.create!(uuid: "abc", fb_id: 'fbid1', username: 'jj')
-      PlayerCreator.create!(uuid: "def", fb_id: 'fbid2', username: 'kk')
+      UserCreator.create!(uuid: "abc", fb_id: 'fbid1', username: 'jj')
+      UserCreator.create!(uuid: "def", fb_id: 'fbid2', username: 'kk')
 
       post '/v1/challenges', challenge_params.to_json, request_headers
 
@@ -51,8 +51,8 @@ RSpec.describe "Challenge friends" do
   end
 
   describe "Query Challenges" do
-    it "fetches all the challenges for a player" do
-      PlayerCreator.create(uuid: "abc", fb_id: 'fbid1')
+    it "fetches all the challenges for a user" do
+      UserCreator.create(uuid: "abc", fb_id: 'fbid1')
 
       Challenges.create!(
         date: "02/02/2013",

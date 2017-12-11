@@ -1,8 +1,8 @@
 module V1
   class DeviceTokensController < ApplicationController
     def create
-      player = Player.find_by uuid: params[:player_id]
-      player.add_device_token(device_token_params)
+      user = User.find_by uuid: params[:user_id]
+      user.add_device_token(device_token_params)
       head :created
     end
 

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'apple-app-site-association', to: 'files#apple_app_site_association'
 
   namespace :v2 do
-    resources :players, only: [:create, :update, :show] do
+    resources :users, only: [:create, :update, :show] do
       resources :device_tokens, only: [:create]
     end
 
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   namespace :v1 do
-    resources :players, only: [:create, :update, :show] do
+    resources :users, only: [:create, :update, :show] do
       resources :device_tokens, only: [:create]
     end
     resources :scores, only: [:create, :index]

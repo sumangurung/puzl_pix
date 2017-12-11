@@ -18,20 +18,20 @@ module V2
           score.update_attributes(params[:challenge][:score])
         end
 
-        player = Player.find_or_create_by(uuid:params[:challenge][:player][:uuid]) do |player|
-          player.update_attributes(params[:challenge][:player])
+        user = User.find_or_create_by(uuid:params[:challenge][:user][:uuid]) do |user|
+          user.update_attributes(params[:challenge][:user])
         end
 
         p = params[:challenge].merge(
           score_id: score.id,
-          player_id: player.id
+          user_id: user.id
         )
 
-        # remove score and player objects
-        p.except!(:score, :player)
+        # remove score and user objects
+        p.except!(:score, :user)
 
         # logger.debug "Score is: #{score.to_json}"
-        # logger.debug "Player is: #{player.to_json}"
+        # logger.debug "User is: #{user.to_json}"
         # logger.debug "Params is: #{p.to_json}"
 
         Challenge.create!(p)
@@ -48,13 +48,13 @@ module V2
     end
 
     def index
-      @challenges = Challenges.fetch(params[:player_id])
+      @challenges = Challenges.fetch(params[:user_id])
       render template: 'challenges/index'
     end
 
     # /challenges/:id	challenges#show
     def show
-      @challenge = Challenge.includes(:score, :player).where(unique_path_id: params[:id]).first
+      @challenge = Challenge.includes(:score, :user).where(unique_path_id: params[:id]).first
       logger.debug "Challenge is: #{@challenge.to_json}"
       render template: '/challenges/show', status: :ok
      end
@@ -70,7 +70,7 @@ module V2
     #     :date,
     #     :picture_url,
     #     :picture_name,
-    #     :player,
+    #     :user,
     #     :score,
     #     :sequence,
     #     :unique_path_id

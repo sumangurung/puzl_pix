@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-describe Player do
+describe User do
 end

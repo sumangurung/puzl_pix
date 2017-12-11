@@ -1,6 +1,6 @@
-class CreatePlayers < ActiveRecord::Migration[5.0]
+class CreateUsers < ActiveRecord::Migration[5.0]
   def change
-    create_table :s do |t|
+    create_table :users do |t|
       t.string :fb_id
       t.string :first_name
       t.string :last_name
@@ -9,7 +9,7 @@ class CreatePlayers < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    add_index :players, :uuid, unique: true
-    add_index :players, :username, unique: true
+    add_index :users, :uuid, unique: true
+    add_index :users, :username, unique: true
   end
 end

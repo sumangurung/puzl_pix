@@ -16,15 +16,15 @@ RSpec.describe "game score" do
       .with(token)
       .and_return(true)
 
-    PlayerCreator.create!(uuid: '123', username: 'kk')
-    PlayerCreator.create!(uuid: '323', username: 'jj')
-    PlayerCreator.create!(uuid: '234', username: 'll')
+    UserCreator.create!(uuid: '123', username: 'kk')
+    UserCreator.create!(uuid: '323', username: 'jj')
+    UserCreator.create!(uuid: '234', username: 'll')
   end
 
   context "for timed games" do
     before do
       Score.create(
-        player_uuid: '123',
+        user_uuid: '123',
         game_id: 'awesomegame1',
         game_level: "1",
         game_mode: "0",
@@ -33,7 +33,7 @@ RSpec.describe "game score" do
       )
 
       Score.create(
-        player_uuid: '323',
+        user_uuid: '323',
         game_id: 'awesomegame2',
         game_level: "1",
         game_mode: "0",
@@ -42,7 +42,7 @@ RSpec.describe "game score" do
       )
 
       Score.create(
-        player_uuid: '234',
+        user_uuid: '234',
         game_id: 'awesomegame3',
         game_level: "3",
         game_mode: "0",
@@ -65,7 +65,7 @@ RSpec.describe "game score" do
   context "untimed game" do
     before do
       Score.create(
-        player_uuid: '123',
+        user_uuid: '123',
         game_id: 'awesomegame1',
         game_level: "1",
         game_mode: "1",
@@ -74,7 +74,7 @@ RSpec.describe "game score" do
       )
 
       Score.create(
-        player_uuid: '323',
+        user_uuid: '323',
         game_id: 'awesomegame2',
         game_level: "1",
         game_mode: "1",
@@ -83,7 +83,7 @@ RSpec.describe "game score" do
       )
 
       Score.create(
-        player_uuid: '234',
+        user_uuid: '234',
         game_id: 'awesomegame3',
         game_level: "3",
         game_mode: "1",

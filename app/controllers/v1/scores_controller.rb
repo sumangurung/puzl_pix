@@ -20,7 +20,7 @@ module V1
 
     private
     def score_params(score)
-      permitted_attributes = %i(uuid player_uuid player_id game_id cols rows
+      permitted_attributes = %i(uuid user_uuid user_id game_id cols rows
       date game_level game_mode moves time gameLevel)
       score.permit(*permitted_attributes)
     end

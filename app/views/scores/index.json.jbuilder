@@ -1,9 +1,9 @@
 json.scores @scores do |score|
   json.date score.date
-  json.player_id score.player_id
-  json.player_uuid score.player_uuid
-  json.player_name score.player && score.player.username #delete this after a while - deprecated
-  json.username score.player && score.player.username
+  json.user_id score.user_id
+  json.user_uuid score.user_uuid
+  json.user_name score.user && score.user.username #delete this after a while - deprecated
+  json.username score.user && score.user.username
   json.game_id score.game_id
   json.cols score.cols
   json.rows score.cols
