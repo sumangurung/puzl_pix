@@ -2,13 +2,12 @@ class CreateScores < ActiveRecord::Migration[5.0]
   def change
     create_table :scores do |t|
       t.date :date
-      t.integer :user_id
-      t.integer :cols
-      t.integer :rows
-      t.integer :game_level
-      t.integer :game_mode
-      t.integer :moves
-      t.integer :time
+      t.integer :cols, null: false
+      t.integer :rows, null: false
+      t.integer :game_level, null: false
+      t.integer :game_mode, null: false
+      t.integer :moves, null: false
+      t.integer :time, null: false
       t.string :user_uuid, null: false
       t.string :uuid, null: false, unique: true
 

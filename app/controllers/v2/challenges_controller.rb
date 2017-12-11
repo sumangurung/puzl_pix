@@ -24,7 +24,9 @@ module V2
 
         p = params[:challenge].merge(
           score_id: score.id,
-          user_id: user.id
+          score_uuid: score.uuid,
+          user_id: user.id,
+          user_uuid: user.uuid
         )
 
         # remove score and user objects

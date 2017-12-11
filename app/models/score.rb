@@ -1,6 +1,6 @@
 class Score < ActiveRecord::Base
   @@permitted_attributes = %i(uuid user_uuid user_id game_id cols rows
-    date game_level game_mode moves time gameLevel)
+    date game_level game_mode moves time)
 
   def Score.permitted_attributes
     return @@permitted_attributes

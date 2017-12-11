@@ -27,8 +27,7 @@ module V2
     private
 
     def user_params
-      permitted_attributes = %i(uuid fb_id first_name last_name
-      username)
+      permitted_attributes = %i(uuid username)
       params.require(:user).permit(*permitted_attributes)
     end
   end

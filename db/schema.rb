@@ -19,21 +19,22 @@ ActiveRecord::Schema.define(version: 20150222230734) do
   end
 
   create_table "challenges", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.date     "date",           null: false
-    t.string   "picture_url",    null: false
-    t.string   "user_id",        null: false
-    t.string   "integer",        null: false
-    t.string   "score_id",       null: false
-    t.string   "sequence",       null: false
-    t.string   "text",           null: false
-    t.string   "unique_path_id", null: false
-    t.string   "string",         null: false
-    t.string   "picture_name",   null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.date     "date",                         null: false
+    t.integer  "user_id",                      null: false
+    t.integer  "score_id",                     null: false
+    t.string   "user_uuid",                    null: false
+    t.string   "score_uuid",                   null: false
+    t.text     "sequence",       limit: 65535, null: false
+    t.string   "unique_path_id",               null: false
+    t.string   "picture_name",                 null: false
+    t.string   "picture_url",                  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["score_id"], name: "index_challenges_on_score_id", using: :btree
+    t.index ["score_uuid"], name: "index_challenges_on_score_uuid", using: :btree
     t.index ["unique_path_id"], name: "index_challenges_on_unique_path_id", using: :btree
     t.index ["user_id"], name: "index_challenges_on_user_id", using: :btree
+    t.index ["user_uuid"], name: "index_challenges_on_user_uuid", using: :btree
   end
 
   create_table "device_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -55,13 +56,12 @@ ActiveRecord::Schema.define(version: 20150222230734) do
 
   create_table "scores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "date"
-    t.integer  "user_id"
-    t.integer  "cols"
-    t.integer  "rows"
-    t.integer  "game_level"
-    t.integer  "game_mode"
-    t.integer  "moves"
-    t.integer  "time"
+    t.integer  "cols",       null: false
+    t.integer  "rows",       null: false
+    t.integer  "game_level", null: false
+    t.integer  "game_mode",  null: false
+    t.integer  "moves",      null: false
+    t.integer  "time",       null: false
     t.string   "user_uuid",  null: false
     t.string   "uuid",       null: false
     t.datetime "created_at", null: false
@@ -73,10 +73,7 @@ ActiveRecord::Schema.define(version: 20150222230734) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "fb_id"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "username"
+    t.string   "username",   null: false
     t.string   "uuid",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
