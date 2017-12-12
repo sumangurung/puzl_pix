@@ -19,17 +19,18 @@ ActiveRecord::Schema.define(version: 20150222230734) do
   end
 
   create_table "challenges", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.date     "date",                         null: false
-    t.integer  "user_id",                      null: false
-    t.integer  "score_id",                     null: false
-    t.string   "user_uuid",                    null: false
-    t.string   "score_uuid",                   null: false
-    t.text     "sequence",       limit: 65535, null: false
-    t.string   "unique_path_id",               null: false
-    t.string   "picture_name",                 null: false
-    t.string   "picture_url",                  null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.date     "date",                                null: false
+    t.integer  "user_id",                             null: false
+    t.integer  "score_id",                            null: false
+    t.string   "user_uuid",                           null: false
+    t.string   "score_uuid",                          null: false
+    t.text     "sequence",              limit: 65535, null: false
+    t.string   "missing_square_number",               null: false
+    t.string   "unique_path_id",                      null: false
+    t.string   "picture_name",                        null: false
+    t.string   "picture_url",                         null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.index ["score_id"], name: "index_challenges_on_score_id", using: :btree
     t.index ["score_uuid"], name: "index_challenges_on_score_uuid", using: :btree
     t.index ["unique_path_id"], name: "index_challenges_on_unique_path_id", using: :btree

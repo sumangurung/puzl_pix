@@ -7,6 +7,7 @@ class CreateChallengeTable < ActiveRecord::Migration[5.0]
       t.string :user_uuid, null: false, unique: false
       t.string :score_uuid, null: false, unique: false
       t.text :sequence, null: false
+      t.string :missing_square_number, null: false
       t.string :unique_path_id, null: false, unique: true
       t.string :picture_name, null: false, unique:false
       t.string :picture_url, null: false

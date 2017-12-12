@@ -6,6 +6,7 @@ json.challenges do
   json.user @challenge.user
   json.score @challenge.score
   json.sequence @challenge.sequence
+  json.missing_square_number @challenge.missing_square_number
   json.unique_path_id @challenge.unique_path_id
   json.picture_name @challenge.picture_name
 end
