@@ -1,6 +1,10 @@
 module V2
   class ChallengesController < ApplicationController
-    skip_before_action :authenticate_request, only: [:show]
+    if Rails.env.development?
+      skip_before_action :authenticate_request, only: [:show, :accept]
+    else
+      skip_before_action :authenticate_request, only: [:show]
+    end
 
     # disable strong params for now
     def params
@@ -54,12 +58,28 @@ module V2
       render template: 'challenges/index'
     end
 
+    # /challenges/accept	challenges#show
+    def accept
+      begin
+        p = {
+          unique_path_id: params[:unique_path_id],
+          user_uuid: params[:user_uuid]
+        }
+
+        Challengee.create!(p)
+      rescue ActiveRecord::RecordNotUnique => e
+        logger.debug "RecordNotUnique: #{e}"
+      end
+
+      @challenge = Challenge.includes(:score, :user).where(unique_path_id: params[:unique_path_id]).first
+      logger.debug "Challenge is: #{@challenge.to_json}"
+      render template: '/challenges/accept', status: :ok
+    end
+
     # /challenges/:id	challenges#show
     def show
-      @challenge = Challenge.includes(:score, :user).where(unique_path_id: params[:id]).first
-      logger.debug "Challenge is: #{@challenge.to_json}"
       render template: '/challenges/show', status: :ok
-     end
+    end
 
     private
     # def score_params

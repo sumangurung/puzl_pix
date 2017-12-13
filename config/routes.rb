@@ -14,7 +14,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :challenges, only: [:create, :index, :show]
+    resources :challenges, only: [:create, :index, :show, :accept] do
+      collection do
+        post :accept
+      end
+    end
   end
 
   namespace :v1 do
