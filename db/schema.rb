@@ -18,6 +18,17 @@ ActiveRecord::Schema.define(version: 20150222230734) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "challengees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "user_uuid",                      null: false
+    t.string   "unique_path_id",                 null: false
+    t.boolean  "rewarded",       default: false, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["unique_path_id"], name: "index_challengees_on_unique_path_id", using: :btree
+    t.index ["user_uuid", "unique_path_id"], name: "index_challengees_on_user_uuid_and_unique_path_id", unique: true, using: :btree
+    t.index ["user_uuid"], name: "index_challengees_on_user_uuid", using: :btree
+  end
+
   create_table "challenges", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "date",                                null: false
     t.integer  "user_id",                             null: false
