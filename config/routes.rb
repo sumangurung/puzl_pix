@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'share', to: 'files#share'
   get 'apple-app-site-association', to: 'files#apple_app_site_association'
 
   namespace :v2 do
