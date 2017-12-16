@@ -78,7 +78,7 @@ module V2
 
     # /challenges/:id	challenges#show
     def show
-      render template: '/challenges/show', status: :ok
+      redirect_to "https://itunes.apple.com/us/app/puzlpix/id960097490?mt=8"
     end
 
     private
