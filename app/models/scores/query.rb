@@ -13,7 +13,7 @@ module Scores
       relation = apply_game_mode_filter(relation)
       relation = apply_game_game_level_filter(relation)
       relation = apply_sort_order(relation)
-      relation = apply_filter_scores_older_than_1_week(relation)
+      relation = apply_filter_scores_older_than_1_month(relation)
       relation = apply_filter_to_filter_out_scores_without_user_record(relation)
       relation = apply_limit(relation)
       relation
@@ -57,8 +57,8 @@ module Scores
       end
     end
 
-    def apply_filter_scores_older_than_1_week(relation)
-      relation.where('date >= ?', 1.week.ago.to_date)
+    def apply_filter_scores_older_than_1_month(relation)
+      relation.where('date >= ?', 1.month.ago.to_date)
     end
 
     def apply_limit(relation)
