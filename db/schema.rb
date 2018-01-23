@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150222230734) do
+ActiveRecord::Schema.define(version: 20180121014151) do
 
   create_table "api_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "token"
@@ -54,6 +54,16 @@ ActiveRecord::Schema.define(version: 20150222230734) do
     t.string   "fb_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "outcomes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "challengee_id", null: false
+    t.integer  "score_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["challengee_id", "score_id"], name: "index_outcomes_on_challengee_id_and_score_id", unique: true, using: :btree
+    t.index ["challengee_id"], name: "index_outcomes_on_challengee_id", using: :btree
+    t.index ["score_id"], name: "index_outcomes_on_score_id", using: :btree
   end
 
   create_table "s", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
