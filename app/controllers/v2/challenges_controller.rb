@@ -67,6 +67,31 @@ module V2
         }
 
         Challengee.create!(p)
+    # /challenges/finish	challenges#finish
+    def finish
+      begin
+        user_uuid      = params[:challengee][:user_uuid]
+        unique_path_id = params[:challengee][:unique_path_id]
+        s              = params[:score]
+
+        challengee = Challengee.find_by!(user_uuid: user_uuid, unique_path_id: unique_path_id)
+
+        if s.nil?
+          Outcome.create!(challengee_id: challengee.id)
+        else
+          score = Score.find_by!(uuid: s.uuid)
+          Outcome.create!(challengee_id: challengee.id, score_id: score.id)
+        end
+
+      rescue ActiveRecord::RecordNotFound => e
+        logger.debug "finish error: RecordNotFound: #{e}"
+      rescue ActiveRecord::RecordNotUnique => e
+        logger.debug "finish error: RecordNotUnique: #{e}"
+      end
+
+      render template: '/challenges/finish', status: :ok
+    end
+
       rescue ActiveRecord::RecordNotUnique => e
         logger.debug "RecordNotUnique: #{e}"
       end
