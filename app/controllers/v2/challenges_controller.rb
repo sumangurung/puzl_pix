@@ -101,6 +101,17 @@ module V2
       render template: '/challenges/accept', status: :ok
     end
 
+    # /challenges/created	challenges#created
+    def created
+      @challenges = Challenge
+          .select(:unique_path_id, :picture_name, :picture_url, :created_at)
+          .where(user_uuid: params[:user_uuid])
+          .order(created_at: :desc)
+          .includes([:score, challengees: [:user, outcomes: :score]])
+      logger.debug "Created challenges are: #{@challenges.to_json}"
+      render template: '/challenges/created', status: :ok
+    end
+
     # /challenges/:id	challenges#show
     def show
       redirect_to "https://itunes.apple.com/us/app/puzlpix/id960097490?mt=8"
