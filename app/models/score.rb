@@ -7,6 +7,7 @@ class Score < ActiveRecord::Base
   end
 
   belongs_to :user, primary_key: 'uuid', foreign_key: "user_uuid", class_name: "User"
+  has_one :challenge, primary_key: 'id', foreign_key: "score_id", class_name: "Score"
   after_initialize :set_date
 
   def set_date
