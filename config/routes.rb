@@ -37,12 +37,9 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :challenges, only: [:create, :index, :show, :accept, :finish, :created, :accepted] do
+    resources :challenges, only: [:create, :index, :show, :accept] do
       collection do
         post :accept
-        post :finish
-        get :created
-        get :accepted
       end
     end
   end

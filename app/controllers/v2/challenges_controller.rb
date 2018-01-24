@@ -67,56 +67,13 @@ module V2
         }
 
         Challengee.create!(p)
-    # /challenges/finish	challenges#finish
-    def finish
-      begin
-        user_uuid      = params[:challengee][:user_uuid]
-        unique_path_id = params[:challengee][:unique_path_id]
-        s              = params[:score]
-
-        challengee = Challengee.find_by!(user_uuid: user_uuid, unique_path_id: unique_path_id)
-
-        if s.nil?
-          Outcome.create!(challengee_id: challengee.id)
-        else
-          score = Score.find_by!(uuid: s[:uuid])
-          Outcome.create!(challengee_id: challengee.id, score_id: score.id)
-        end
-
-      rescue ActiveRecord::RecordNotFound => e
-        logger.debug "finish error: RecordNotFound: #{e}"
       rescue ActiveRecord::RecordNotUnique => e
-        logger.debug "finish error: RecordNotUnique: #{e}"
+        logger.debug "RecordNotUnique: #{e}"
       end
 
-      render template: '/challenges/finish', status: :ok
-    end
-
-    # /challenges/accepted	challenges#accepted
-    def accepted
-      challengee_user_uuid = params[:user_uuid]
-
-      @challenges = Challenge
-          .select(:score_id, :unique_path_id, :picture_name, :picture_url, :created_at)
-          .order(created_at: :desc)
-          .includes([:score, challengees: [:user, outcomes: :score]])
-          .where('challengees.user_uuid= ?', challengee_user_uuid).references(:challengees)
-
-      logger.debug "Created challenges are: #{@challenges.to_json}"
-      render template: '/challenges/accepted', status: :ok
-    end
-
-    # /challenges/created	challenges#created
-    def created
-      user_uuid = params[:user_uuid]
-
-      @challenges = Challenge
-          .select(:score_id,:unique_path_id, :picture_name, :picture_url, :created_at)
-          .where(user_uuid: user_uuid)
-          .order(created_at: :desc)
-          .includes([:score, challengees: [:user, outcomes: :score]])
-      logger.debug "Created challenges are: #{@challenges.to_json}"
-      render template: '/challenges/created', status: :ok
+      @challenge = Challenge.includes(:score, :user).where(unique_path_id: params[:unique_path_id]).first
+      logger.debug "Challenge is: #{@challenge.to_json}"
+      render template: '/challenges/accept', status: :ok
     end
 
     # /challenges/:id	challenges#show
