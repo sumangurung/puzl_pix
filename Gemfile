@@ -7,6 +7,7 @@ gem 'pg'
 gem 'mysql2'
 gem 'unicorn'
 gem 'jbuilder'
+gem 'will_paginate'
 
 group :development do
   gem 'spring'
