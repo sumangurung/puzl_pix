@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         post :accept
         post :finish
         get :created
+        get :accepted
       end
     end
   end

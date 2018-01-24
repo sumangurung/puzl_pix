@@ -92,13 +92,18 @@ module V2
       render template: '/challenges/finish', status: :ok
     end
 
-      rescue ActiveRecord::RecordNotUnique => e
-        logger.debug "RecordNotUnique: #{e}"
-      end
+    # /challenges/accepted	challenges#accepted
+    def accepted
+      challengee_user_uuid = params[:user_uuid]
 
-      @challenge = Challenge.includes(:score, :user).where(unique_path_id: params[:unique_path_id]).first
-      logger.debug "Challenge is: #{@challenge.to_json}"
-      render template: '/challenges/accept', status: :ok
+      @challenges = Challenge
+          .select(:score_id, :unique_path_id, :picture_name, :picture_url, :created_at)
+          .order(created_at: :desc)
+          .includes([:score, challengees: [:user, outcomes: :score]])
+          .where('challengees.user_uuid= ?', challengee_user_uuid).references(:challengees)
+
+      logger.debug "Created challenges are: #{@challenges.to_json}"
+      render template: '/challenges/accepted', status: :ok
     end
 
     # /challenges/created	challenges#created
