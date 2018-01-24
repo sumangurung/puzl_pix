@@ -7,7 +7,7 @@ json.challenges @challenges do |challenge|
   json.challengees challenge.challengees do |challengee|
     json.created_at challengee.created_at
     json.rewarded challengee.rewarded
-    json.unique_path_id = challengee.unique_path_id
+    json.unique_path_id challengee.unique_path_id
     json.user_uuid challengee.user_uuid
     json.outcomes challengee.outcomes do |outcome|
       json.score outcome.score
