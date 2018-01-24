@@ -127,7 +127,7 @@ module V3
       per_page = params[:per_page] || 10
 
       @challenges = Challenge
-        .select(:score_id, :unique_path_id, :picture_name, :picture_url, :created_at)
+        .select(:score_id, :unique_path_id, :picture_name, :picture_url, :thumb_name, :thumb_url, :created_at)
         .paginate(page: page, per_page: per_page)
         .order(created_at: :desc)
         .includes([:user, :score, challengees: [:user, outcomes: :score]])
@@ -144,7 +144,7 @@ module V3
       per_page = params[:per_page] || 10
 
       @challenges = Challenge
-        .select(:score_id,:unique_path_id, :picture_name, :picture_url, :created_at)
+        .select(:score_id,:unique_path_id, :picture_name, :picture_url, :thumb_name, :thumb_url, :created_at)
         .where(user_uuid: user_uuid)
         .paginate(page: page, per_page: per_page)
         .order(created_at: :desc)

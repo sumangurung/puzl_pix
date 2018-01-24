@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180121014151) do
+ActiveRecord::Schema.define(version: 20180124232928) do
 
   create_table "api_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "token"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 20180121014151) do
     t.string   "picture_url",                         null: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "thumb_name"
+    t.string   "thumb_url"
     t.index ["score_id"], name: "index_challenges_on_score_id", using: :btree
     t.index ["score_uuid"], name: "index_challenges_on_score_uuid", using: :btree
     t.index ["unique_path_id"], name: "index_challenges_on_unique_path_id", using: :btree
