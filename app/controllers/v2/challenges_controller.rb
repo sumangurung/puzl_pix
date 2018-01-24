@@ -79,7 +79,7 @@ module V2
         if s.nil?
           Outcome.create!(challengee_id: challengee.id)
         else
-          score = Score.find_by!(uuid: s.uuid)
+          score = Score.find_by!(uuid: s[:uuid])
           Outcome.create!(challengee_id: challengee.id, score_id: score.id)
         end
 
@@ -103,9 +103,11 @@ module V2
 
     # /challenges/created	challenges#created
     def created
+      user_uuid = params[:user_uuid]
+
       @challenges = Challenge
-          .select(:unique_path_id, :picture_name, :picture_url, :created_at)
-          .where(user_uuid: params[:user_uuid])
+          .select(:score_id,:unique_path_id, :picture_name, :picture_url, :created_at)
+          .where(user_uuid: user_uuid)
           .order(created_at: :desc)
           .includes([:score, challengees: [:user, outcomes: :score]])
       logger.debug "Created challenges are: #{@challenges.to_json}"
