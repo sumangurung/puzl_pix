@@ -6,12 +6,12 @@ json.challenges @challenges do |challenge|
   json.thumb_url challenge.thumb_url
   json.created_at challenge.created_at
   json.score challenge.score
+  json.user challenge.user
   json.challengees challenge.challengees do |challengee|
     json.created_at challengee.created_at
     json.rewarded challengee.rewarded
     json.unique_path_id challengee.unique_path_id
-    json.user_uuid challengee.user_uuid
-    json.username challengee.user.username
+    json.user challengee.user
     json.outcomes challengee.outcomes do |outcome|
       json.score outcome.score
     end
