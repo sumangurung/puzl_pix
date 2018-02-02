@@ -24,6 +24,15 @@ module V3
       end
     end
 
+    def admin
+      @user = User.find_by! username: "Heisenberg"
+      if @user.nil?
+        render template: '/v3/users/admin', status: :unprocessable_entity
+      else
+        render template: '/v3/users/admin', status: :ok
+      end
+    end
+
     private
 
     def user_params

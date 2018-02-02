@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   get 'apple-app-site-association', to: 'files#apple_app_site_association'
 
   namespace :v3 do
-    resources :users, only: [:create, :update, :show] do
+    resources :users, only: [:create, :update, :admin, :show] do
       resources :device_tokens, only: [:create]
+      collection { get :admin }    # /users/admin
     end
 
     resources :scores, only: [:create, :index, :create_bulk] do
