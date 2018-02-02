@@ -133,7 +133,7 @@ module V3
         .includes([:user, :score, challengees: [:user, outcomes: :score]])
         .where('challengees.user_uuid = ?', challengee_user_uuid).references(:challengees)
 
-      logger.debug "Created challenges are: #{@challenges.to_json}"
+      logger.debug "Accepted challenges are: #{@challenges.to_json}"
       render template: '/v3/challenges/accepted', status: :ok
     end
 
@@ -144,11 +144,11 @@ module V3
       per_page = params[:per_page] || 10
 
       @challenges = Challenge
-        .select(:score_id,:unique_path_id, :picture_name, :picture_url, :thumb_name, :thumb_url, :created_at)
+        .select(:user_id, :user_uuid, :score_id, :id, :unique_path_id, :picture_name, :picture_url, :thumb_name, :thumb_url, :created_at)
         .where(user_uuid: user_uuid)
         .paginate(page: page, per_page: per_page)
         .order(created_at: :desc)
-        .includes([:score, challengees: [:user, outcomes: :score]])
+        .includes([:user, :score, challengees: [{ :outcomes => :score }, :user]])
 
       logger.debug "Created challenges are: #{@challenges.to_json}"
       render template: '/v3/challenges/created', status: :ok

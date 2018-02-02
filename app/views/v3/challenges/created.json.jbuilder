@@ -1,4 +1,6 @@
 json.challenges @challenges do |challenge|
+  json.id challenge.id
+  json.user challenge.user
   json.unique_path_id challenge.unique_path_id
   json.picture_name challenge.picture_name
   json.picture_url challenge.picture_url
@@ -10,7 +12,7 @@ json.challenges @challenges do |challenge|
     json.created_at challengee.created_at
     json.rewarded challengee.rewarded
     json.unique_path_id challengee.unique_path_id
-    json.user_uuid challengee.user_uuid
+    json.user challengee.user
     json.outcomes challengee.outcomes do |outcome|
       json.score outcome.score
     end
