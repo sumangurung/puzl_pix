@@ -32,6 +32,8 @@ module V3
     end
 
     def index
+      page = params[:page] || 1
+      params[:per_page] = params[:per_page] || 20
       @scores = Scores.fetch(params)
       render template: '/v3/scores/index'
     end

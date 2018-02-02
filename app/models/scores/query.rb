@@ -13,9 +13,9 @@ module Scores
       relation = apply_game_mode_filter(relation)
       relation = apply_game_game_level_filter(relation)
       relation = apply_sort_order(relation)
-      relation = apply_filter_scores_older_than_1_month(relation)
+      relation = apply_filter_scores_older_than_10_months(relation)
       relation = apply_filter_to_filter_out_scores_without_user_record(relation)
-      relation = apply_limit(relation)
+      relation = apply_pagination(relation)
       relation
     end
 
@@ -57,12 +57,14 @@ module Scores
       end
     end
 
-    def apply_filter_scores_older_than_1_month(relation)
-      relation.where('date >= ?', 1.month.ago.to_date)
+    def apply_pagination(relation)
+      page = @params[:page] || 1
+      per_page = @params[:per_page] || 10
+      relation.paginate(page: page, per_page: per_page)
     end
 
-    def apply_limit(relation)
-      relation.limit(Rails.configuration.scores_limit)
+    def apply_filter_scores_older_than_10_months(relation)
+      relation.where('date >= ?', 10.months.ago.to_date)
     end
 
     def apply_filter_to_filter_out_scores_without_user_record(relation)
