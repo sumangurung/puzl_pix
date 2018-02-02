@@ -2,8 +2,8 @@ json.challenges @challenges do |challenge|
   json.unique_path_id challenge.unique_path_id
   json.picture_name challenge.picture_name
   json.picture_url challenge.picture_url
-  json.thumb_name challenge.thumb_name
-  json.thumb_url challenge.thumb_url
+  json.thumb_name (challenge.thumb_name.nil? ? challenge.picture_name : challenge.thumb_name)
+  json.thumb_url (challenge.thumb_url.nil? ? challenge.picture_url : challenge.thumb_url)
   json.created_at challenge.created_at
   json.score challenge.score
   json.user challenge.user
