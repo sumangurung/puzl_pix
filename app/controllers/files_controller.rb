@@ -5,7 +5,7 @@ class FilesController < ActionController::API
     h = request.headers["HTTP_ACCEPT"]
 
     if h.include? "text/html"
-      redirect_to "https://itunes.apple.com/us/app/puzlpix/id960097490?mt=8"
+      redirect_to "https://itunes.apple.com/app/puzlpix/id960097490"
     else
       render :json => {}
     end
