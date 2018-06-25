@@ -13,9 +13,17 @@ body {
   padding:20px;
 }
 
-img {
+img.phone {
     max-width: 100%;
     height: auto;
+}
+
+img.button {
+    max-width: 50%;
+    height: auto;
+    margin-top:10px;
+    margin-bottom:0px;
+    width: 250px;
 }
 
 .row:after {
@@ -49,6 +57,11 @@ img {
     text-align: left;
   }
 
+  img.button {
+      max-width: 60%;
+      height: auto;
+  }
+
   .col-s-1 {width: 8.33%;}
   .col-s-2 {width: 16.66%;}
   .col-s-3 {width: 25%;}
@@ -65,6 +78,11 @@ img {
 
 /* Large devices, desktop: */
 @media only screen and (min-width: 768px) {
+  img.button {
+      max-width: 100%;
+      height: auto;
+  }
+
   .col-1 {width: 8.33%;}
   .col-2 {width: 16.66%;}
   .col-3 {width: 25%;}
