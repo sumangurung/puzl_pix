@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.superclassllc.puzlpix",
+    "sha256_cert_fingerprints":
+    ["41:C1:46:8D:22:2D:34:D1:FC:C6:D0:D1:C7:3E:E9:0F:EA:48:2A:40:17:42:FF:4B:5A:CA:B0:ED:EA:AF:18:57"]
+  }
+}]
