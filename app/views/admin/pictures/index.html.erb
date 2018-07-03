@@ -11,6 +11,8 @@
     <th>Show Attribution</th>
     <th>Release Date Time</th>
     <th>Image Link</th>
+    <th></th>
+    <th></th>
   </tr>
 <% @pictures.each do |picture| %>
   <tr>
@@ -24,6 +26,8 @@
         <%= link_to File.basename(picture.image.try(:file).try(:file)), picture.image.url %>
       <% end %>
     </td>
+    <td> <%= link_to "Edit", edit_admin_picture_path(picture) %></td>
+    <td> <%= button_to "Delete", admin_picture_path(picture), method: :delete %></td>
   </tr>
 <% end %>
 </table>

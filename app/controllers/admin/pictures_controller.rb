@@ -12,6 +12,22 @@ class Admin::PicturesController < ActionController::Base
   def new
   end
 
+  def edit
+    @picture = Picture.find(params[:id])
+  end
+
+  def update
+    @picture = Picture.find(params[:id])
+    @picture.update_attributes(picture_params)
+    redirect_to admin_pictures_path
+  end
+
+  def destroy
+    @picture = Picture.find(params[:id])
+    @picture.destroy
+    redirect_to admin_pictures_path
+  end
+
   def create
     picture = Picture.new(picture_params)
     picture.save!
