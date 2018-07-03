@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20180124232928) do
     t.index ["score_id"], name: "index_outcomes_on_score_id", using: :btree
   end
 
-  create_table "s", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "players", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "fb_id"
     t.string   "first_name"
     t.string   "last_name"
