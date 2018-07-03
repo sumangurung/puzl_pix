@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'share', to: 'files#share'
   get 'apple-app-site-association', to: 'files#apple_app_site_association'
 
+
   namespace :v3 do
     resources :users, only: [:create, :update, :admin, :show] do
       resources :device_tokens, only: [:create]
@@ -52,6 +53,10 @@ Rails.application.routes.draw do
     resources :scores, only: [:create, :index]
     resources :challenges, only: [:create, :index]
   end
+
+    namespace :admin do
+      resources :pictures
+    end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
