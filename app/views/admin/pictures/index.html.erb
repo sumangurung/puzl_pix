@@ -1,1 +1,25 @@
-Hello
+<h1>Pictures</h1>
+<p>
+<%= link_to 'Upload New Picture', new_admin_picture_path %>
+</p>
+
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last name</th>
+    <th>Location</th>
+    <th>Show Attribution</th>
+    <th>Release Date Time</th>
+    <th>Image Link</th>
+  </tr>
+<% @pictures.each do |picture| %>
+  <tr>
+    <td><%= picture.first_name %></td>
+    <td><%= picture.last_name %></td>
+    <td><%= picture.location %></td>
+    <td><%= picture.show_attribution %></td>
+    <td><%= picture.release_datetime %></td>
+    <td><%= File.basename(picture.image.try(:file).try(:file)) %></td>
+  </tr>
+<% end %>
+</table>

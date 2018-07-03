@@ -1,0 +1,34 @@
+<h1>Upload New Picture</h1>
+
+<%= form_for Picture.new, url: admin_pictures_path, html: { multipart: true } do |f| %>
+  <p>
+    <label>Image</label>
+    <%= f.file_field :image %>
+  </p>
+  <p>
+    <label>First Name</label>
+    <%= f.text_field :first_name %>
+  </p>
+  <p>
+    <label>Last Name</label>
+    <%= f.text_field :last_name %>
+  </p>
+
+  <p>
+    <label>Location</label>
+    <%= f.text_field :location %>
+  </p>
+  <p>
+    <label>Show Attribution</label>
+    <%= f.check_box :show_attribution %>
+  </p>
+
+  <p>
+    <label>Release Date/Time</label>
+    <%= f.text_field :release_datetime %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
