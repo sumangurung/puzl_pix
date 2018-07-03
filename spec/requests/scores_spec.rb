@@ -20,15 +20,13 @@ RSpec.describe "game score" do
   it "stores the game score" do
     user = User.create(
       uuid: SecureRandom.uuid,
-      username: 'jd',
-      first_name: 'John',
-      last_name: 'Doe'
+      username: 'jd'
     )
 
     score_params = {
       score: {
+        uuid: SecureRandom.uuid,
         user_uuid: user.uuid,
-        game_id: 'awesomegame1',
         cols: '3',
         date: Date.today,
         game_level: "very",
@@ -52,21 +50,17 @@ RSpec.describe "game score" do
   it "fetches the scores of all users" do
     user1 = User.create(
       uuid: SecureRandom.uuid,
-      username: "jd",
-      first_name: "John",
-      last_name: "Doe",
+      username: "jd"
     )
 
     user2 = User.create(
       uuid: SecureRandom.uuid,
-      username: "ss",
-      first_name: "Susan",
-      last_name: "Smith"
+      username: "ss"
     )
 
     Score.create(
+      uuid: SecureRandom.uuid,
       user_uuid: user1.uuid,
-      game_id: 'awesomegame1',
       cols: '3',
       date: Date.today,
       game_level: "1",
@@ -77,8 +71,8 @@ RSpec.describe "game score" do
     )
 
     Score.create(
+      uuid: SecureRandom.uuid,
       user_uuid: user2.uuid,
-      game_id: 'awesomegame3',
       cols: '4',
       date: Date.today,
       game_level: "3",
@@ -97,24 +91,22 @@ RSpec.describe "game score" do
     expect(first_score["user_uuid"]).to eq user1.uuid
     expect(first_score["user_name"]).to eq user1.username
     expect(first_score["username"]).to eq user1.username
-    expect(first_score["game_id"]).to eq 'awesomegame1'
     expect(first_score["cols"]).to eq 3
     expect(first_score["rows"]).to eq 3
     expect(first_score["date"]).to eq Date.today.strftime("%Y-%m-%d")
     expect(first_score["game_level"]).to eq 1
-    expect(first_score["game_mode"]).to eq "0"
+    expect(first_score["game_mode"]).to eq 0
     expect(first_score["moves"]).to eq 20
     expect(first_score["time"]).to eq 140
 
     expect(second_score["user_uuid"]).to eq user2.uuid
     expect(second_score["user_name"]).to eq user2.username
     expect(second_score["username"]).to eq user2.username
-    expect(second_score["game_id"]).to eq 'awesomegame3'
     expect(second_score["cols"]).to eq 4
     expect(second_score["rows"]).to eq 4
     expect(second_score["date"]).to eq Date.today.strftime("%Y-%m-%d")
     expect(second_score["game_level"]).to eq 3
-    expect(second_score["game_mode"]).to eq "0"
+    expect(second_score["game_mode"]).to eq 0
     expect(second_score["moves"]).to eq 40
     expect(second_score["time"]).to eq 340
   end

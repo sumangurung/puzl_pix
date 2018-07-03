@@ -9,7 +9,7 @@ describe "Authentication with api key" do
       "Authorization" => "Token token=#{api_key}foo"
     }
 
-    get "/v1/challenges", { fb_id: "123" }, request_headers
+    get "/v1/challenges", {}, request_headers
 
     expect(response.status).to eq 401
     body = JSON.parse(response.body)
@@ -24,7 +24,7 @@ describe "Authentication with api key" do
       "Authorization" => "Token token=#{api_key}"
     }
 
-    get "/v1/challenges", { fb_id: "123" }, request_headers
+    get "/v1/challenges", {}, request_headers
 
     expect(response.status).to eq 200
   end

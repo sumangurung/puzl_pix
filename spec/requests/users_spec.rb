@@ -18,7 +18,7 @@ RSpec.describe "user registration info" do
 
   it "creates a user record" do
     user_params = {
-      user: { uuid: "123abc", fb_id: "123", first_name: "Jimmy", last_name: "Johnson", username: "jj" }
+      user: { uuid: "123abc", username: "jj" }
     }.to_json
 
     post '/v1/users', user_params, request_headers
@@ -26,23 +26,17 @@ RSpec.describe "user registration info" do
     expect(response.status).to eq 201
     user = JSON.parse(response.body)['user']
     expect(user['uuid']).to eq('123abc')
-    expect(user['fb_id']).to eq("123")
-    expect(user['first_name']).to eq("Jimmy")
-    expect(user['last_name']).to eq("Johnson")
     expect(user['username']).to eq("jj")
 
     users = User.all
     expect(users.count).to eq 1
     expect(users.first.uuid).to eq("123abc")
-    expect(users.first.fb_id).to eq("123")
-    expect(users.first.first_name).to eq("Jimmy")
-    expect(users.first.last_name).to eq("Johnson")
     expect(users.first.username).to eq("jj")
   end
 
   it "creates a default username if a username is not passed in" do
     user_params = {
-      user: { uuid: "123abc", fb_id: "123", first_name: "Jimmy", last_name: "Johnson", username: "" }
+      user: { uuid: "123abc", username: "" }
     }.to_json
 
     post '/v1/users', user_params, request_headers
@@ -55,7 +49,7 @@ RSpec.describe "user registration info" do
 
   it "users have unique usernames" do
     user_params = {
-      user: { uuid: "123abc", fb_id: "123", first_name: "Jimmy", last_name: "Johnson", username: "" }
+      user: { uuid: "123abc", username: "" }
     }.to_json
 
     post '/v1/users', user_params, request_headers
@@ -66,10 +60,9 @@ RSpec.describe "user registration info" do
     expect(user['username']).to match(/\AUser [0-9\.]*\Z/)
 
     second_user_params = {
-      user: { uuid: "234abc", first_name: "James", last_name: "Milner", username: user['username'] }
+      user: { uuid: "234abc", username: user['username'] }
     }.to_json
 
-    require 'pry'
     post '/v1/users', second_user_params, request_headers
     expect(response.status).to eq 422
     errors = JSON.parse(response.body)['user']['errors']
@@ -80,20 +73,17 @@ RSpec.describe "user registration info" do
     user_params = { user: { uuid: "123abc" } }.to_json
     post '/v1/users', user_params, request_headers
 
-    user_params = { user: { fb_id: "123", first_name: "Jimmy", last_name: "Johnson", username: "jj" } }.to_json
+    user_params = { user: { username: "jj" } }.to_json
     put '/v1/users/123abc', user_params, request_headers
 
     expect(response.status).to eq 200
     user = JSON.parse(response.body)['user']
     expect(user['uuid']).to eq('123abc')
-    expect(user['fb_id']).to eq("123")
-    expect(user['first_name']).to eq("Jimmy")
-    expect(user['last_name']).to eq("Johnson")
     expect(user['username']).to eq("jj")
   end
 
   it "responds with error if the username is updated to be blank" do
-    user_params = { user: { uuid: "123abc", fb_id: "123", first_name: "Jimmy", last_name: "Johnson", username: "jj" } }.to_json
+    user_params = { user: { uuid: "123abc", username: "jj" } }.to_json
     post '/v1/users', user_params, request_headers
 
     updated_user_params = { user: { username: "" } }.to_json
@@ -117,7 +107,7 @@ RSpec.describe "user registration info" do
   end
 
   it "returns the json of the user information" do
-    user_params = { user: { uuid: "123abc", fb_id: "123", first_name: "Jimmy", last_name: "Johnson", username: "jj" } }.to_json
+    user_params = { user: { uuid: "123abc", username: "jj" } }.to_json
     post '/v1/users', user_params, request_headers
     expect(response.status).to eq 201
 
@@ -126,9 +116,6 @@ RSpec.describe "user registration info" do
     expect(response.status).to eq 200
     user = JSON.parse(response.body)['user']
     expect(user['uuid']).to eq('123abc')
-    expect(user['fb_id']).to eq("123")
-    expect(user['first_name']).to eq("Jimmy")
-    expect(user['last_name']).to eq("Johnson")
     expect(user['username']).to eq("jj")
   end
 
