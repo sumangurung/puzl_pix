@@ -19,7 +19,11 @@
     <td><%= picture.location %></td>
     <td><%= picture.show_attribution %></td>
     <td><%= picture.release_datetime %></td>
-    <td><%= File.basename(picture.image.try(:file).try(:file)) %></td>
+    <td>
+      <% if picture.image.present? %>
+        <%= link_to File.basename(picture.image.try(:file).try(:file)), picture.image.url %>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 </table>
