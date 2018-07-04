@@ -25,6 +25,8 @@ Rails.application.routes.draw do
         get :accepted
       end
     end
+
+    resources :pictures, only: [:index]
   end
 
   namespace :v2 do
@@ -44,6 +46,8 @@ Rails.application.routes.draw do
         post :accept
       end
     end
+
+    resources :pictures, only: [:index]
   end
 
   namespace :v1 do
