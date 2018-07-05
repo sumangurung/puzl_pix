@@ -1,4 +1,4 @@
-module V2
+module V4
   class PicturesController < ApplicationController
     def index
       page = params[page] || 1
@@ -7,7 +7,6 @@ module V2
         .where('release_datetime <= ?', Time.now)
         .paginate(page: page, per_page: per_page)
         .order(created_at: :desc)
-      render template: 'pictures/index'
     end
   end
 end

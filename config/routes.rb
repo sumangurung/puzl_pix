@@ -3,8 +3,7 @@ Rails.application.routes.draw do
   get 'share', to: 'files#share'
   get 'apple-app-site-association', to: 'files#apple_app_site_association'
 
-
-  namespace :v3 do
+  namespace :v4 do
     resources :users, only: [:create, :update, :admin, :show] do
       resources :device_tokens, only: [:create]
       collection { get :admin }    # /users/admin
@@ -29,6 +28,29 @@ Rails.application.routes.draw do
     resources :pictures, only: [:index]
   end
 
+  namespace :v3 do
+    resources :users, only: [:create, :update, :admin, :show] do
+      resources :device_tokens, only: [:create]
+      collection { get :admin }    # /users/admin
+    end
+
+    resources :scores, only: [:create, :index, :create_bulk] do
+      # match :batch_create, via: [:post],  on: :collection
+      collection do # vX/scores/create_bulk
+        post :create_bulk
+      end
+    end
+
+    resources :challenges, only: [:create, :index, :show, :accept, :finish, :created, :accepted] do
+      collection do
+        post :accept
+        post :finish
+        get :created
+        get :accepted
+      end
+    end
+  end
+
   namespace :v2 do
     resources :users, only: [:create, :update, :show] do
       resources :device_tokens, only: [:create]
@@ -46,8 +68,6 @@ Rails.application.routes.draw do
         post :accept
       end
     end
-
-    resources :pictures, only: [:index]
   end
 
   namespace :v1 do
