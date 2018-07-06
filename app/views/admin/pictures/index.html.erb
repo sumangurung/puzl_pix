@@ -11,6 +11,7 @@
     <th>Show Attribution</th>
     <th>Release Date Time</th>
     <th>Image Link</th>
+    <th>Thumb Link</th>
     <th></th>
     <th></th>
   </tr>
@@ -24,6 +25,12 @@
     <td>
       <% if picture.image.present? %>
         <%= link_to File.basename(picture.image.try(:file).try(:filename)), picture.image.url %>
+      <% end %>
+    </td>
+
+    <td>
+      <% if picture.image.present? && picture.image.thumb.present? %>
+        <%= link_to File.basename(picture.image.thumb.try(:file).try(:filename)), picture.image.thumb.url %>
       <% end %>
     </td>
     <td> <%= link_to "Edit", edit_admin_picture_path(picture) %></td>
