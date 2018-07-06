@@ -23,7 +23,7 @@
     <td><%= picture.release_datetime %></td>
     <td>
       <% if picture.image.present? %>
-        <%= link_to File.basename(picture.image.try(:file).try(:file)), picture.image.url %>
+        <%= link_to File.basename(picture.image.try(:file).try(:filename)), picture.image.url %>
       <% end %>
     </td>
     <td> <%= link_to "Edit", edit_admin_picture_path(picture) %></td>
